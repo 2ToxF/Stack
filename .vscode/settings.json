@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "cstdint": "cpp",
+        "variant": "cpp",
+        "cstddef": "cpp",
+        "cstdlib": "cpp"
+    }
+}
