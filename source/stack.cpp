@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "input_output.h"
 #include "stack.h"
 #include "verify.h"
 
@@ -15,19 +16,19 @@ void StackDtor(stack_t* stk)
 
 CodeError StackResizeDown(stack_t* stk)
 {
-    STACK_VERIFY(stk)
+    STACK_VERIFY(stk);
 
     stk->capacity /= RESIZE_COEF_UP;
     stk->data = (StackElem_t*) realloc(stk->data, stk->capacity*sizeof(StackElem_t));
 
-    STACK_VERIFY(stk)
+    STACK_VERIFY(stk);
     return NO_ERROR;
 }
 
 
 CodeError StackResizeUp(stack_t* stk)
 {
-    STACK_VERIFY(stk)
+    STACK_VERIFY(stk);
 
     stk->capacity *= RESIZE_COEF_UP;
     stk->data = (StackElem_t*) realloc(stk->data, stk->capacity*sizeof(StackElem_t));
