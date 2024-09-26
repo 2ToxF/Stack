@@ -13,24 +13,24 @@ void StackDtor(stack_t* stk)
 }
 
 
-CodeError ResizeStackDown(stack_t* stk)
+CodeError StackResizeDown(stack_t* stk)
 {
     STACK_VERIFY(stk)
 
     stk->capacity /= RESIZE_COEF_UP;
-    stk->data = (StackElem_t*) realloc(stk->data, stk->capacity);
+    stk->data = (StackElem_t*) realloc(stk->data, stk->capacity*sizeof(StackElem_t));
 
     STACK_VERIFY(stk)
     return NO_ERROR;
 }
 
 
-CodeError ResizeStackUp(stack_t* stk)
+CodeError StackResizeUp(stack_t* stk)
 {
     STACK_VERIFY(stk)
 
     stk->capacity *= RESIZE_COEF_UP;
-    stk->data = (StackElem_t*) realloc(stk->data, stk->capacity);
+    stk->data = (StackElem_t*) realloc(stk->data, stk->capacity*sizeof(StackElem_t));
 
     STACK_VERIFY(stk);
     return NO_ERROR;
@@ -69,7 +69,7 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
     *var = stk->data[stk->index];
 
     if (stk->index == stk->capacity / RESIZE_COEF_DOWN && (size_t) stk->capacity > DEFAULT_STK_CAPACITY)
-        if ((code_err = ResizeStackDown(stk)) != NO_ERROR)
+        if ((code_err = StackResizeDown(stk)) != NO_ERROR)
             return code_err;
 
     STACK_VERIFY(stk);
@@ -83,7 +83,7 @@ CodeError StackPush(stack_t* stk, StackElem_t value)
 
     STACK_VERIFY(stk);
     if (stk->index == stk->capacity - 1)
-        if ((code_err = ResizeStackUp(stk)) != NO_ERROR)
+        if ((code_err = StackResizeUp(stk)) != NO_ERROR)
             return code_err;
 
     stk->data[stk->index] = value;

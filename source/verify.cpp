@@ -15,7 +15,7 @@ CodeError StackVerify(const stack_t* stk)
         return STACK_ANTIOVERFLOW_ERR;
     if (stk->index >= stk->capacity)
         return STACK_OVERFLOW_ERR;
-    // if (stk->index < stk->capacity / RESIZE_COEF_DOWN && (size_t) stk->capacity > DEFAULT_STK_CAPACITY)
-    //     return STACK_USES_MUCH_MEM_ERR;
+    if (stk->index < stk->capacity / RESIZE_COEF_DOWN && (size_t) stk->capacity > DEFAULT_STK_CAPACITY)
+        return STACK_USES_MUCH_MEM_ERR;
     return NO_ERROR;
 }

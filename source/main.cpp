@@ -6,7 +6,6 @@
 
 CodeError run_program();
 
-
 int main()
 {
     CodeError code_err = run_program();
@@ -20,7 +19,8 @@ CodeError run_program()
     CodeError code_err = NO_ERROR;
 
     stack_t stack = CREATE_STACK(stack);
-    StackInit(&stack);
+    if ((code_err = StackInit(&stack)) != NO_ERROR)
+        return code_err;
 
     int numbers_counter = 0;
     printf("begin\n");
@@ -30,11 +30,7 @@ CodeError run_program()
             return code_err;
 
         printf("num_to_put = %d, stack_idx = %d, stack_size = %d\n", i, stack.index, stack.capacity);
-
         numbers_counter++;
-
-        if (numbers_counter == 50)
-            exit(0);
     }
 
     int printed_numbers_counter = 0;
@@ -44,8 +40,8 @@ CodeError run_program()
     {
         if ((code_err = StackPop(&stack, &var_for_print)) != NO_ERROR)
             return code_err;
-        printf("var_for_print = %d, stack_idx = %d, stack_size = %d\n", var_for_print, stack.index, stack.capacity);
 
+        printf("var_for_print = %d, stack_idx = %d, stack_size = %d\n", var_for_print, stack.index, stack.capacity);
         printed_numbers_counter++;
     }
 

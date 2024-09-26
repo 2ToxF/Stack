@@ -45,8 +45,8 @@ const int RESIZE_COEF_UP   = 2;
 const int RESIZE_COEF_DOWN = 4;
 
 void StackDtor(stack_t* stk);
-CodeError ResizeStackDown(stack_t* stk);
-CodeError ResizeStackUp  (stack_t* stk);
+CodeError StackResizeDown(stack_t* stk);
+CodeError StackResizeUp  (stack_t* stk);
 CodeError StackInit(stack_t* stk);
 CodeError StackPop (stack_t* stk, StackElem_t* var);
 CodeError StackPush(stack_t* stk, StackElem_t value);
