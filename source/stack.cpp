@@ -6,12 +6,61 @@
 #include "stack.h"
 #include "verify.h"
 
+static const int HASH_SHIFT_COEF = 5;
+static const unsigned long START_HASH = 5381;
+
 
 void StackDtor(stack_t* stk)
 {
     free((char*) stk->data - SIZE_OF_CANARY); stk->data = NULL;
     stk->index = 0;
     stk->capacity = 0;
+}
+
+
+CodeError StackHash(stack_t* stk)
+{
+    CodeError code_err = NO_ERROR;
+    if ((code_err = StackHashStruct(stk)) != NO_ERROR)
+        return code_err;
+    if ((code_err = StackHashData(stk)) != NO_ERROR)
+        return code_err;
+    return code_err;
+}
+
+
+CodeError StackHashData(stack_t* stk)
+{
+    stk->hash_data = 0;
+    unsigned long calc_hash = START_HASH;
+    char* cur_byte = (char*) stk->data;
+
+    for (size_t i = 0; i < stk->capacity*sizeof(StackElem_t); i++)
+    {
+        calc_hash = ((calc_hash << HASH_SHIFT_COEF) + calc_hash) + *cur_byte;
+        cur_byte++;
+    }
+
+    stk->hash_data = calc_hash;
+    return NO_ERROR;
+}
+
+
+CodeError StackHashStruct(stack_t* stk)
+{
+    stk->hash_struct = 0;
+    unsigned long calc_hash = START_HASH;
+    char* cur_byte = (char*) stk;
+    const size_t sizeof_stk_struct = sizeof(*stk);
+
+    for (size_t i = 0; i < sizeof_stk_struct; i++)
+    {
+        calc_hash = ((calc_hash << HASH_SHIFT_COEF) + calc_hash) + *cur_byte;
+        cur_byte++;
+    }
+
+    stk->hash_struct = calc_hash;
+    return NO_ERROR;
 }
 
 
@@ -28,6 +77,7 @@ CodeError StackResizeDown(stack_t* stk)
         return OUT_OF_MEMORY_ERR;
     stk->data = (StackElem_t*) new_data;
 
+    STACK_HASH(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -48,6 +98,7 @@ CodeError StackResizeUp(stack_t* stk)
         return OUT_OF_MEMORY_ERR;
     stk->data = (StackElem_t*) new_data;
 
+    STACK_HASH(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -69,6 +120,7 @@ CodeError StackInit(stack_t* stk)
     stk->index = 0;
     stk->capacity = DEFAULT_STK_CAPACITY;
 
+    STACK_HASH(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -93,6 +145,7 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
         if ((code_err = StackResizeDown(stk)) != NO_ERROR)
             return code_err;
 
+    STACK_HASH(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -110,6 +163,7 @@ CodeError StackPush(stack_t* stk, StackElem_t value)
     stk->data[stk->index] = value;
     stk->index++;
 
+    STACK_HASH(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }

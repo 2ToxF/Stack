@@ -14,6 +14,6 @@
 #define STACK_VERIFY(stk)
 #endif
 
-CodeError StackVerify(const stack_t* stk, const char* file_name, int line_number);
+CodeError StackVerify(stack_t* stk, const char* file_name, int line_number);
 
 #endif

@@ -7,10 +7,12 @@
 #define ON_DEBUG(...) __VA_ARGS__
 #define CANARY_STACK_VALUE 0xBAD57ACCBAD57ACC
 #define CANARY_DATA_VALUE  0xBADDA7A0BADDA7A0
-#define CREATE_STACK(stk) {CANARY_STACK_VALUE, #stk, __FILE__, __LINE__, __func__, 0, 0, 0, CANARY_STACK_VALUE}
+#define CREATE_STACK(stk) {CANARY_STACK_VALUE, #stk, __FILE__, __LINE__, __func__, 0, 0, 0, 0, 0, CANARY_STACK_VALUE}
+#define STACK_HASH(stk) StackHash(stk)
 #else
 #define ON_DEBUG(...)
 #define CREATE_STACK(stk) {}
+#define STACK_HASH(stk)
 #endif
 
 typedef int StackElem_t;
@@ -26,8 +28,8 @@ enum CodeError
     STACK_OVERFLOW_ERR,
     OUT_OF_MEMORY_ERR,
     STACK_USES_MUCH_MEM_ERR,
-    CANARY_STACK_ERR,
-    CANARY_DATA_ERR,
+    STKSTRUCT_INFO_CORRUPT_ERR,
+    STKDATA_INFO_CORRUPT_ERR,
 };
 
 struct stack_t
@@ -37,6 +39,8 @@ struct stack_t
     ON_DEBUG(const char* init_file);
     ON_DEBUG(int init_line);
     ON_DEBUG(const char* init_func);
+    ON_DEBUG(unsigned long hash_struct);
+    ON_DEBUG(unsigned long hash_data);
     StackElem_t* data;
     int index;
     int capacity;
@@ -49,6 +53,9 @@ const int RESIZE_COEF_DOWN = RESIZE_COEF * 2;
 static const int SIZE_OF_CANARY = sizeof(uint64_t);
 
 void StackDtor           (stack_t* stk);
+CodeError StackHash      (stack_t* stk);
+CodeError StackHashData  (stack_t* stk);
+CodeError StackHashStruct(stack_t* stk);
 CodeError StackResizeDown(stack_t* stk);
 CodeError StackResizeUp  (stack_t* stk);
 CodeError StackInit      (stack_t* stk);
