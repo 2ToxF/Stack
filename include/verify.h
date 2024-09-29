@@ -5,7 +5,6 @@
 
 #ifndef NDEBUG
 #define STACK_VERIFY(stk)                                                        \
-    if (StackVerify(stk, __FILE__, __LINE__) != NO_ERROR)                                            \
     do {                                                                         \
         CodeError temp_code_err = NO_ERROR;                                      \
         if ((temp_code_err = StackVerify(stk, __FILE__, __LINE__)) != NO_ERROR)  \

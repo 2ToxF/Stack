@@ -14,10 +14,10 @@
 
 void print_code_error(CodeError code_error)
 {
-    #define ERR_DESCR_(error)                                                       \
-        case (error):                                                               \
+    #define ERR_DESCR_(error)                                   \
+        case (error):                                           \
             printf("\n\n" RED "CODE_ERROR: " #error WHT "\n");  \
-            break;
+            break
 
     switch(code_error)
     {
@@ -25,13 +25,16 @@ void print_code_error(CodeError code_error)
             printf("\n\n" GRN "Code was completed without errors" WHT "\n");
             break;
 
-        ERR_DESCR_(STACK_ALREADY_INITED_ERR)
-        ERR_DESCR_(NULL_STK_STRUCT_PTR_ERR)
-        ERR_DESCR_(NULL_STK_DATA_PTR_ERR)
-        ERR_DESCR_(NEG_STK_CAPACITY_ERR)
-        ERR_DESCR_(STACK_ANTIOVERFLOW_ERR)
-        ERR_DESCR_(STACK_OVERFLOW_ERR)
-        ERR_DESCR_(STACK_USES_MUCH_MEM_ERR)
+        ERR_DESCR_(STACK_ALREADY_INITED_ERR);
+        ERR_DESCR_(NULL_STK_STRUCT_PTR_ERR);
+        ERR_DESCR_(NULL_STK_DATA_PTR_ERR);
+        ERR_DESCR_(NEG_STK_CAPACITY_ERR);
+        ERR_DESCR_(STACK_ANTIOVERFLOW_ERR);
+        ERR_DESCR_(STACK_OVERFLOW_ERR);
+        ERR_DESCR_(OUT_OF_MEMORY_ERR);
+        ERR_DESCR_(STACK_USES_MUCH_MEM_ERR);
+        ERR_DESCR_(CANARY_STACK_ERR);
+        ERR_DESCR_(CANARY_DATA_ERR);
 
         default:
             printf("\n\n" RED "CODE_ERROR: UNKNOWN_ERROR" WHT "\n");
@@ -44,14 +47,16 @@ void print_code_error(CodeError code_error)
 
 void StackDump(const stack_t* stk, const char* file_name, int line_number)
 {
-    printf(RED "stack_t " MAG "[0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
-           stk, file_name, line_number,
+    printf(RED "stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
+           stk->stk_name, stk,
+           file_name, line_number,
            stk->init_file, stk->init_line, stk->init_func);
     printf(GRN "{\n"
            "%-10s= %d\n"
            "%-10s= %d\n"
            "\n"
-           "\tdata [0x%p]:\n\t{\n",
+           MAG "\tdata [0x%p]:\n"
+           CYN "\t{\n",
            "\tindex", stk->index,
            "\tcapacity", stk->capacity,
            stk->data);
@@ -63,5 +68,5 @@ void StackDump(const stack_t* stk, const char* file_name, int line_number)
         printf("\t\t[%d - %d] = NULL\n", stk->index, stk->capacity - 1);
 
     printf("\t}\n"
-           "}\n" WHT);
+           GRN "}\n" WHT);
 }

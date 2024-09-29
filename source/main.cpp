@@ -24,7 +24,7 @@ CodeError run_program()
 
     int numbers_counter = 0;
     printf("begin\n");
-    for (int i = 2; i < 100; i++)
+    for (StackElem_t i = 2; i < 100; i++)
     {
         if ((code_err = StackPush(&stack, i)) != NO_ERROR)
             return code_err;
@@ -34,7 +34,7 @@ CodeError run_program()
     }
 
     int printed_numbers_counter = 0;
-    int var_for_print = 0;
+    StackElem_t var_for_print = 0;
     printf("\n\nprint result\n");
     for (int i = 2; i < 100; i++)
     {
