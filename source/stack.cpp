@@ -1,5 +1,3 @@
-#include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "input_output.h"
@@ -75,13 +73,13 @@ CodeError StackResizeDown(stack_t* stk)
     stk->capacity /= RESIZE_COEF;
     char* new_data = (char*) ((char*) realloc((char*) stk->data - SIZE_OF_CANARY,
                                               stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY);
-    *((uint64_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = CANARY_DATA_VALUE;
+    *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
 
     if (new_data == NULL)
         return OUT_OF_MEMORY_ERR;
     stk->data = (StackElem_t*) new_data;
 
-    STACK_HASH(stk);
+    StackHash(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -94,13 +92,13 @@ CodeError StackResizeUp(stack_t* stk)
     stk->capacity *= RESIZE_COEF;
     char* new_data = (char*) realloc((char*) stk->data - SIZE_OF_CANARY,
                                      stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
-    *((uint64_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = CANARY_DATA_VALUE;
+    *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
 
     if (new_data == NULL)
         return OUT_OF_MEMORY_ERR;
     stk->data = (StackElem_t*) new_data;
 
-    STACK_HASH(stk);
+    StackHash(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -108,21 +106,25 @@ CodeError StackResizeUp(stack_t* stk)
 
 CodeError StackInit(stack_t* stk)
 {
-    if (stk->data != NULL || stk->index != 0 || stk->capacity != 0)
-    {
-        StackDump(stk, __FILE__, __LINE__);
-        return STACK_ALREADY_INITED_ERR;
-    }
+    #ifndef NDEBUG
+        if (stk->data != NULL || stk->index != 0 || stk->capacity != 0)
+        {
+            StackDump(stk, __FILE__, __LINE__);
+            return STACK_ALREADY_INITED_ERR;
+        }
+    #endif
+
+    stk->left_canary = stk->right_canary = STACK_CANARY_VALUE;
 
     char* new_data = (char*) calloc(DEFAULT_STK_CAPACITY*sizeof(StackElem_t) + SIZE_OF_CANARY*2, sizeof(char));
-    *((uint64_t*) new_data) = CANARY_DATA_VALUE;
-    *((uint64_t*) (new_data + DEFAULT_STK_CAPACITY*sizeof(StackElem_t) + SIZE_OF_CANARY)) = CANARY_DATA_VALUE;
+    *((canary_t*) new_data) = DATA_CANARY_VALUE;
+    *((canary_t*) (new_data + DEFAULT_STK_CAPACITY*sizeof(StackElem_t) + SIZE_OF_CANARY)) = DATA_CANARY_VALUE;
 
     stk->data = (StackElem_t*) (new_data + SIZE_OF_CANARY);
     stk->index = 0;
     stk->capacity = DEFAULT_STK_CAPACITY;
 
-    STACK_HASH(stk);
+    StackHash(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -133,11 +135,13 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
     STACK_VERIFY(stk);
 
     CodeError code_err = NO_ERROR;
-    if (stk->index == 0)
-    {
-        StackDump(stk, __FILE__, __LINE__);
-        return STACK_ANTIOVERFLOW_ERR;
-    }
+    #ifndef NDEBUG
+        if (stk->index == 0)
+        {
+            StackDump(stk, __FILE__, __LINE__);
+            return STACK_ANTIOVERFLOW_ERR;
+        }
+    #endif
 
     if (stk->index == stk->capacity / RESIZE_COEF_DOWN && (size_t) stk->capacity > DEFAULT_STK_CAPACITY)
         if ((code_err = StackResizeDown(stk)) != NO_ERROR)
@@ -147,7 +151,7 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
     *var = stk->data[stk->index];
     stk->data[stk->index] = 0;
 
-    STACK_HASH(stk);
+    StackHash(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
@@ -165,7 +169,7 @@ CodeError StackPush(stack_t* stk, StackElem_t value)
     stk->data[stk->index] = value;
     stk->index++;
 
-    STACK_HASH(stk);
+    StackHash(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
 }

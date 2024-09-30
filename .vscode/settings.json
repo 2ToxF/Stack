@@ -29,6 +29,7 @@
         "stdexcept": "cpp",
         "system_error": "cpp",
         "text_encoding": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "cassert": "cpp"
     }
 }

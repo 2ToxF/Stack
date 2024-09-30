@@ -3,19 +3,18 @@
 
 #include <stdint.h>
 
+#include "debug_mode.h"
+
 #ifndef NDEBUG
 #define ON_DEBUG(...) __VA_ARGS__
-#define CANARY_STACK_VALUE 0xBAD57ACCBAD57ACC
-#define CANARY_DATA_VALUE  0xBADDA7A0BADDA7A0
-#define CREATE_STACK(stk) {CANARY_STACK_VALUE, #stk, __FILE__, __LINE__, __func__, 0, 0, 0, 0, 0, CANARY_STACK_VALUE}
-#define STACK_HASH(stk) StackHash(stk)
+#define CREATE_STACK(stk) {0, #stk, __FILE__, __LINE__, __func__}
 #else
 #define ON_DEBUG(...)
 #define CREATE_STACK(stk) {}
-#define STACK_HASH(stk)
 #endif
 
 typedef int StackElem_t;
+typedef uint64_t canary_t;
 
 enum CodeError
 {
@@ -34,25 +33,27 @@ enum CodeError
 
 struct stack_t
 {
-    ON_DEBUG(uint64_t canary_left);
+    canary_t left_canary;
     ON_DEBUG(const char* stk_name);
     ON_DEBUG(const char* init_file);
     ON_DEBUG(int init_line);
     ON_DEBUG(const char* init_func);
-    ON_DEBUG(unsigned long hash_struct);
-    ON_DEBUG(unsigned long hash_data);
+    unsigned long hash_struct;
+    unsigned long hash_data;
     StackElem_t* data;
     int index;
     int capacity;
-    ON_DEBUG(uint64_t canary_right);
+    canary_t right_canary;
 };
 
 const size_t DEFAULT_STK_CAPACITY = 8;
 const int RESIZE_COEF      = 2;
 const int RESIZE_COEF_DOWN = RESIZE_COEF * 2;
-static const int SIZE_OF_CANARY = sizeof(uint64_t);
+const canary_t STACK_CANARY_VALUE = 0xBAD57ACCBAD57ACC;
+const canary_t DATA_CANARY_VALUE  = 0xBADDA7A0BADDA7A0;
+const size_t SIZE_OF_CANARY       = sizeof(canary_t);
 
-void StackDtor           (stack_t* stk);
+void      StackDtor      (stack_t* stk);
 CodeError StackHash      (stack_t* stk);
 CodeError StackHashData  (stack_t* stk);
 CodeError StackHashStruct(stack_t* stk);

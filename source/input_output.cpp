@@ -45,28 +45,30 @@ void print_code_error(CodeError code_error)
 }
 
 
-void StackDump(const stack_t* stk, const char* file_name, int line_number)
-{
-    printf(RED "stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
-           stk->stk_name, stk,
-           file_name, line_number,
-           stk->init_file, stk->init_line, stk->init_func);
-    printf(GRN "{\n"
-           "%-10s= %d\n"
-           "%-10s= %d\n"
-           "\n"
-           MAG "\tdata [0x%p]:\n"
-           CYN "\t{\n",
-           "\tindex", stk->index,
-           "\tcapacity", stk->capacity,
-           stk->data);
+#ifndef NDEBUG
+    void StackDump(const stack_t* stk, const char* file_name, int line_number)
+    {
+        printf(RED "stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
+            stk->stk_name, stk,
+            file_name, line_number,
+            stk->init_file, stk->init_line, stk->init_func);
+        printf(GRN "{\n"
+            "%-10s= %d\n"
+            "%-10s= %d\n"
+            "\n"
+            MAG "\tdata [0x%p]:\n"
+            CYN "\t{\n",
+            "\tindex", stk->index,
+            "\tcapacity", stk->capacity,
+            stk->data);
 
-    for (int i = 0; i < stk->index; i++)
-        printf("\t\t*[%d] = %d\n", i, stk->data[i]);
+        for (int i = 0; i < stk->index; i++)
+            printf("\t\t*[%d] = %d\n", i, stk->data[i]);
 
-    if (stk->index != stk->capacity - 1)
-        printf("\t\t[%d - %d] = NULL\n", stk->index, stk->capacity - 1);
+        if (stk->index != stk->capacity - 1)
+            printf("\t\t[%d - %d] = NULL\n", stk->index, stk->capacity - 1);
 
-    printf("\t}\n"
-           GRN "}\n" WHT);
-}
+        printf("\t}\n"
+            GRN "}\n" WHT);
+    }
+#endif
