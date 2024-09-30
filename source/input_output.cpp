@@ -33,8 +33,8 @@ void print_code_error(CodeError code_error)
         ERR_DESCR_(STACK_OVERFLOW_ERR);
         ERR_DESCR_(OUT_OF_MEMORY_ERR);
         ERR_DESCR_(STACK_USES_MUCH_MEM_ERR);
-        ERR_DESCR_(STKSTRUCT_INFO_CORRUPT_ERR);
         ERR_DESCR_(STKDATA_INFO_CORRUPT_ERR);
+        ERR_DESCR_(STKSTRUCT_INFO_CORRUPT_ERR);
 
         default:
             printf("\n\n" RED "CODE_ERROR: UNKNOWN_ERROR" WHT "\n");

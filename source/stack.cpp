@@ -49,6 +49,9 @@ CodeError StackHashData(stack_t* stk)
 CodeError StackHashStruct(stack_t* stk)
 {
     stk->hash_struct = 0;
+    unsigned long temp_hash_data = stk->hash_data;
+    stk->hash_data = 0;
+
     unsigned long calc_hash = START_HASH;
     char* cur_byte = (char*) stk;
     const size_t sizeof_stk_struct = sizeof(*stk);
@@ -60,6 +63,7 @@ CodeError StackHashStruct(stack_t* stk)
     }
 
     stk->hash_struct = calc_hash;
+    stk->hash_data = temp_hash_data;
     return NO_ERROR;
 }
 
@@ -90,8 +94,6 @@ CodeError StackResizeUp(stack_t* stk)
     stk->capacity *= RESIZE_COEF;
     char* new_data = (char*) realloc((char*) stk->data - SIZE_OF_CANARY,
                                      stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
-    printf("left canary = %llu\n", *((uint64_t*) (new_data - SIZE_OF_CANARY)));
-    printf("data[0] = %d\n", *((StackElem_t*) new_data));
     *((uint64_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = CANARY_DATA_VALUE;
 
     if (new_data == NULL)
@@ -137,13 +139,13 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
         return STACK_ANTIOVERFLOW_ERR;
     }
 
-    stk->index--;
-    *var = stk->data[stk->index];
-    stk->data[stk->index] = 0;
-
     if (stk->index == stk->capacity / RESIZE_COEF_DOWN && (size_t) stk->capacity > DEFAULT_STK_CAPACITY)
         if ((code_err = StackResizeDown(stk)) != NO_ERROR)
             return code_err;
+
+    stk->index--;
+    *var = stk->data[stk->index];
+    stk->data[stk->index] = 0;
 
     STACK_HASH(stk);
     STACK_VERIFY(stk);

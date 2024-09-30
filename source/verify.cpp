@@ -36,24 +36,13 @@ CodeError StackVerify(stack_t* stk, const char* file_name, int line_number)
             return STKDATA_INFO_CORRUPT_ERR;
         }
 
-        unsigned long temp_hash_struct = stk->hash_struct;
-        printf("%lu != %lu\n", temp_hash_struct, stk->hash_struct);
+        unsigned long temp_hash_data = stk->hash_data, temp_hash_struct = stk->hash_struct;
         STACK_HASH(stk);
-        printf("%lu\n", stk->hash_struct);
-        STACK_HASH(stk);
-        printf("%lu\n", stk->hash_struct);
-        STACK_HASH(stk);
-        printf("%lu\n", stk->hash_struct);
-        STACK_HASH(stk);
-        printf("%lu\n", stk->hash_struct);
         if (temp_hash_struct != stk->hash_struct)
         {
             StackDump(stk, file_name, line_number);
             return STKSTRUCT_INFO_CORRUPT_ERR;
         }
-
-        unsigned long temp_hash_data = stk->hash_data;
-        STACK_HASH(stk);
         if (temp_hash_data != stk->hash_data)
         {
             StackDump(stk, file_name, line_number);
