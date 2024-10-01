@@ -1,3 +1,8 @@
+/*!
+    \file
+    File with functions and macro for checking wheter stack is working without problems or not
+*/
+
 #ifndef VERIFY_H
 #define VERIFY_H
 
@@ -5,6 +10,7 @@
 #include "stack.h"
 
 #ifndef NDEBUG
+/// @brief Macro for verifying stack
 #define STACK_VERIFY(stk)                                    \
     do {                                                     \
         CodeError temp_code_err = NO_ERROR;                  \
@@ -16,6 +22,7 @@
         }                                                    \
     } while(0)
 #else
+/// @brief Macro for verifying stack
 #define STACK_VERIFY(stk)                                    \
     do {                                                     \
         CodeError temp_code_err = NO_ERROR;                  \
@@ -24,6 +31,11 @@
     } while(0)
 #endif
 
+/*!
+    Verifies stack's sructure and data (elements)
+    \param[in]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+*/
 CodeError StackVerify(stack_t* stk);
 
 #endif

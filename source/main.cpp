@@ -1,3 +1,8 @@
+/*!
+    \author Toxic
+    \date 01.10.2024
+*/
+
 #include <stdio.h>
 
 #include "stack.h"

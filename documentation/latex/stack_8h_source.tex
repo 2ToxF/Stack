@@ -1,0 +1,87 @@
+\doxysection{stack.\+h}
+\hypertarget{stack_8h_source}{}\label{stack_8h_source}\index{include/stack.h@{include/stack.h}}
+\mbox{\hyperlink{stack_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ STACK\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ STACK\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}debug\_mode.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ ON\_DEBUG(...)\ \_\_VA\_ARGS\_\_}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ CREATE\_STACK(stk)\ \{0,\ \#stk,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_func\_\_\}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ ON\_DEBUG(...)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ CREATE\_STACK(stk)\ \{\}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{StackElem\_t}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ uint64\_t\ \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\_t}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ NO\_ERROR,}
+\DoxyCodeLine{00035\ \ \ \ \ STACK\_ALREADY\_INITED\_ERR,}
+\DoxyCodeLine{00036\ \ \ \ \ NULL\_STK\_STRUCT\_PTR\_ERR,}
+\DoxyCodeLine{00037\ \ \ \ \ NULL\_STK\_DATA\_PTR\_ERR,}
+\DoxyCodeLine{00038\ \ \ \ \ NEG\_STK\_CAPACITY\_ERR,}
+\DoxyCodeLine{00039\ \ \ \ \ STACK\_ANTIOVERFLOW\_ERR,}
+\DoxyCodeLine{00040\ \ \ \ \ STACK\_OVERFLOW\_ERR,}
+\DoxyCodeLine{00041\ \ \ \ \ OUT\_OF\_MEMORY\_ERR,}
+\DoxyCodeLine{00042\ \ \ \ \ STACK\_USES\_MUCH\_MEM\_ERR,}
+\DoxyCodeLine{00043\ \ \ \ \ STKDATA\_INFO\_CORRUPT\_ERR,}
+\DoxyCodeLine{00044\ \ \ \ \ STKSTRUCT\_INFO\_CORRUPT\_ERR,}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structstack__t}{stack\_t}}}
+\DoxyCodeLine{00049\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\_t}}\ left\_canary;}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}{ON\_DEBUG}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ stk\_name);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}{ON\_DEBUG}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ init\_file);}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}{ON\_DEBUG}}(\textcolor{keywordtype}{int}\ init\_line);}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}{ON\_DEBUG}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ init\_func);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ hash\_struct;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ hash\_data;}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{StackElem\_t}}*\ data;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{int}\ index;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{int}\ capacity;}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\_t}}\ right\_canary;}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{stack_8h_aa554aef23f9707fdb1e7691530259481}{DEFAULT\_STK\_CAPACITY}}\ =\ 8;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{stack_8h_a09b4dfab0c89912c73bdd68923d1f2f8}{RESIZE\_COEF}}\ \ \ \ \ \ =\ 2;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{stack_8h_acd39ec2282cd555d99c21c3f5845d92a}{RESIZE\_COEF\_DOWN}}\ =\ \mbox{\hyperlink{stack_8h_a09b4dfab0c89912c73bdd68923d1f2f8}{RESIZE\_COEF}}\ *\ 2;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{const}\ \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\_t}}\ \mbox{\hyperlink{stack_8h_af7ebb6331d94a2f6c321384e8743056a}{STACK\_CANARY\_VALUE}}\ =\ 0xBAD57ACCBAD57ACC;}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{const}\ \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\_t}}\ \mbox{\hyperlink{stack_8h_a8a401c5b1b3e9d5599f766e1c060e02b}{DATA\_CANARY\_VALUE}}\ \ =\ 0xBADDA7A0BADDA7A0;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{stack_8h_a2c8db6997ee5d91851d1c3b16fed9351}{SIZE\_OF\_CANARY}}\ \ \ \ \ \ \ =\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\_t}});}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \mbox{\hyperlink{stack_8h_ad67c4445b09d694a85da6ea407aaae52}{StackDtor}}\ \ \ \ \ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00092\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_aea38482d61370bd16f3abefb58ec2448}{StackHash}}\ \ \ \ \ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_aa137db29b47216a444abd6b2762aaee9}{StackHashData}}\ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00106\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_ab211be79a1e6df2d3df33500f96f9167}{StackHashStruct}}(\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00113\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_acd3a4bfe2a275e9392dbbce9abdca04d}{StackResizeDown}}(\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_a8a1cbe7084271102ccf1ba1c81d5935b}{StackResizeUp}}\ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_a1600a4c9f1d32c7b9a8e13b58732260d}{StackInit}}\ \ \ \ \ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00135\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_a90a5cc295836028d05c1094858196ba4}{StackPop}}\ \ \ \ \ \ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk,\ \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{StackElem\_t}}*\ var);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ \mbox{\hyperlink{stack_8h_a924a150a69d0b3cf306189c063d9a361}{StackPush}}\ \ \ \ \ \ (\mbox{\hyperlink{structstack__t}{stack\_t}}*\ stk,\ \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{StackElem\_t}}\ value);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

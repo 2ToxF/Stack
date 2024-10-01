@@ -4,9 +4,12 @@
 #include "stack.h"
 #include "verify.h"
 
+//----------------------------------------------------------------------------------------------------------------------
+
 static const int HASH_SHIFT_COEF = 5;
 static const unsigned long START_HASH = 5381;
 
+//----------------------------------------------------------------------------------------------------------------------
 
 void StackDtor(stack_t* stk)
 {
@@ -15,17 +18,22 @@ void StackDtor(stack_t* stk)
     stk->capacity = 0;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackHash(stack_t* stk)
 {
     CodeError code_err = NO_ERROR;
+
     if ((code_err = StackHashStruct(stk)) != NO_ERROR)
         return code_err;
+
     if ((code_err = StackHashData(stk)) != NO_ERROR)
         return code_err;
+
     return code_err;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackHashData(stack_t* stk)
 {
@@ -43,6 +51,7 @@ CodeError StackHashData(stack_t* stk)
     return NO_ERROR;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackHashStruct(stack_t* stk)
 {
@@ -65,6 +74,7 @@ CodeError StackHashStruct(stack_t* stk)
     return NO_ERROR;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackResizeDown(stack_t* stk)
 {
@@ -84,6 +94,7 @@ CodeError StackResizeDown(stack_t* stk)
     return NO_ERROR;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackResizeUp(stack_t* stk)
 {
@@ -103,6 +114,7 @@ CodeError StackResizeUp(stack_t* stk)
     return NO_ERROR;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackInit(stack_t* stk)
 {
@@ -129,6 +141,7 @@ CodeError StackInit(stack_t* stk)
     return NO_ERROR;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackPop(stack_t* stk, StackElem_t* var)
 {
@@ -156,6 +169,7 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
     return NO_ERROR;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 CodeError StackPush(stack_t* stk, StackElem_t value)
 {
