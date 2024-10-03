@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "input_output.h"
 #include "stack.h"
@@ -76,46 +77,6 @@ CodeError StackHashStruct(stack_t* stk)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackResizeDown(stack_t* stk)
-{
-    STACK_VERIFY(stk);
-
-    stk->capacity /= RESIZE_COEF;
-    char* new_data = (char*) ((char*) realloc((char*) stk->data - SIZE_OF_CANARY,
-                                              stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY);
-    *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
-
-    if (new_data == NULL)
-        return OUT_OF_MEMORY_ERR;
-    stk->data = (StackElem_t*) new_data;
-
-    StackHash(stk);
-    STACK_VERIFY(stk);
-    return NO_ERROR;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-CodeError StackResizeUp(stack_t* stk)
-{
-    STACK_VERIFY(stk);
-
-    stk->capacity *= RESIZE_COEF;
-    char* new_data = (char*) realloc((char*) stk->data - SIZE_OF_CANARY,
-                                     stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
-    *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
-
-    if (new_data == NULL)
-        return OUT_OF_MEMORY_ERR;
-    stk->data = (StackElem_t*) new_data;
-
-    StackHash(stk);
-    STACK_VERIFY(stk);
-    return NO_ERROR;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 CodeError StackInit(stack_t* stk)
 {
     #ifndef NDEBUG
@@ -182,6 +143,48 @@ CodeError StackPush(stack_t* stk, StackElem_t value)
 
     stk->data[stk->index] = value;
     stk->index++;
+
+    StackHash(stk);
+    STACK_VERIFY(stk);
+    return NO_ERROR;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+CodeError StackResizeDown(stack_t* stk)
+{
+    STACK_VERIFY(stk);
+
+    stk->capacity /= RESIZE_COEF;
+    char* new_data = (char*) realloc((char*) stk->data - SIZE_OF_CANARY,
+                                     stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
+    *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
+    memset(new_data + stk->index*sizeof(StackElem_t), 0, (stk->capacity - stk->index)*sizeof(StackElem_t));
+
+    if (new_data == NULL)
+        return OUT_OF_MEMORY_ERR;
+    stk->data = (StackElem_t*) new_data;
+
+    StackHash(stk);
+    STACK_VERIFY(stk);
+    return NO_ERROR;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+CodeError StackResizeUp(stack_t* stk)
+{
+    STACK_VERIFY(stk);
+
+    stk->capacity *= RESIZE_COEF;
+    char* new_data = (char*) realloc((char*) stk->data - SIZE_OF_CANARY,
+                                     stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
+    *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
+    memset(new_data + stk->index*sizeof(StackElem_t), 0, (stk->capacity - stk->index)*sizeof(StackElem_t));
+
+    if (new_data == NULL)
+        return OUT_OF_MEMORY_ERR;
+    stk->data = (StackElem_t*) new_data;
 
     StackHash(stk);
     STACK_VERIFY(stk);

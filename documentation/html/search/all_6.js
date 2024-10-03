@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5fcode_5ferror_0',['print_code_error',['../input__output_8h.html#aec0f655a41512865092b220398169334',1,'input_output.cpp']]]
+  ['on_5fdebug_0',['ON_DEBUG',['../stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3',1,'stack.h']]]
 ];

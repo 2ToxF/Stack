@@ -12,11 +12,12 @@
 #ifndef NDEBUG
 /// @brief Macro for verifying stack
 #define STACK_VERIFY(stk)                                    \
-    do {                                                     \
+    do                                                       \
+    {                                                        \
         CodeError temp_code_err = NO_ERROR;                  \
         if ((temp_code_err = StackVerify(stk)) != NO_ERROR)  \
         {                                                    \
-            if (temp_code_err >= STACK_USES_MUCH_MEM_ERR)    \
+            if (temp_code_err >= STACK_ANTIOVERFLOW_ERR)     \
                 StackDump(stk, __FILE__, __LINE__);          \
             return temp_code_err;                            \
         }                                                    \

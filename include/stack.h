@@ -40,8 +40,10 @@ enum CodeError
     STACK_OVERFLOW_ERR,
     OUT_OF_MEMORY_ERR,
     STACK_USES_MUCH_MEM_ERR,
-    STKDATA_INFO_CORRUPT_ERR,
+    STKSTRUCT_CANARY_CORRUPT_ERR,
+    STKDATA_CANARY_CORRUPT_ERR,
     STKSTRUCT_INFO_CORRUPT_ERR,
+    STKDATA_INFO_CORRUPT_ERR,
 };
 
 /// @brief Sructure with stack info
@@ -106,20 +108,6 @@ CodeError StackHashData  (stack_t* stk);
 CodeError StackHashStruct(stack_t* stk);
 
 /*! -----------------------------------------------------------------------------------------------------
-    Downsizes the stack
-    \param[in, out]  stk  Pointer to stack sructure
-    \return Type of code error or 0 for "no error"-state
-    ----------------------------------------------------------------------------------------------------- */
-CodeError StackResizeDown(stack_t* stk);
-
-/*! -----------------------------------------------------------------------------------------------------
-    Upsizes the stack
-    \param[in, out]  stk  Pointer to stack sructure
-    \return Type of code error or 0 for "no error"-state
-    ----------------------------------------------------------------------------------------------------- */
-CodeError StackResizeUp  (stack_t* stk);
-
-/*! -----------------------------------------------------------------------------------------------------
     Initializes stack
     \param[in, out]  stk  Pointer to stack sructure
     \return Type of code error or 0 for "no error"-state
@@ -141,5 +129,19 @@ CodeError StackPop       (stack_t* stk, StackElem_t* var);
     \return Type of code error or 0 for "no error"-state
     ----------------------------------------------------------------------------------------------------- */
 CodeError StackPush      (stack_t* stk, StackElem_t value);
+
+/*! -----------------------------------------------------------------------------------------------------
+    Downsizes the stack
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+CodeError StackResizeDown(stack_t* stk);
+
+/*! -----------------------------------------------------------------------------------------------------
+    Upsizes the stack
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+CodeError StackResizeUp  (stack_t* stk);
 
 #endif

@@ -100,7 +100,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &quot;debug_mode.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="debug__mode_8h_source.html">debug_mode.h</a>&quot;</code><br />
 </div>
 <p><a href="stack_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -145,8 +145,11 @@ Enumerations</h2></td></tr>
 , <b>OUT_OF_MEMORY_ERR</b>
 , <br />
 &#160;&#160;<b>STACK_USES_MUCH_MEM_ERR</b>
-, <b>STKDATA_INFO_CORRUPT_ERR</b>
+, <b>STKSTRUCT_CANARY_CORRUPT_ERR</b>
+, <b>STKDATA_CANARY_CORRUPT_ERR</b>
 , <b>STKSTRUCT_INFO_CORRUPT_ERR</b>
+, <br />
+&#160;&#160;<b>STKDATA_INFO_CORRUPT_ERR</b>
 <br />
  }</td></tr>
 <tr class="memdesc:a4890027e84c3d8fa2a1701b5689a10ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated types of code errors or 0 for "no error"-state. <br /></td></tr>
@@ -162,16 +165,16 @@ Functions</h2></td></tr>
 <tr class="separator:aa137db29b47216a444abd6b2762aaee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab211be79a1e6df2d3df33500f96f9167" id="r_ab211be79a1e6df2d3df33500f96f9167"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab211be79a1e6df2d3df33500f96f9167">StackHashStruct</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk)</td></tr>
 <tr class="separator:ab211be79a1e6df2d3df33500f96f9167"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd3a4bfe2a275e9392dbbce9abdca04d" id="r_acd3a4bfe2a275e9392dbbce9abdca04d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd3a4bfe2a275e9392dbbce9abdca04d">StackResizeDown</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk)</td></tr>
-<tr class="separator:acd3a4bfe2a275e9392dbbce9abdca04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a1cbe7084271102ccf1ba1c81d5935b" id="r_a8a1cbe7084271102ccf1ba1c81d5935b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a1cbe7084271102ccf1ba1c81d5935b">StackResizeUp</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk)</td></tr>
-<tr class="separator:a8a1cbe7084271102ccf1ba1c81d5935b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1600a4c9f1d32c7b9a8e13b58732260d" id="r_a1600a4c9f1d32c7b9a8e13b58732260d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1600a4c9f1d32c7b9a8e13b58732260d">StackInit</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk)</td></tr>
 <tr class="separator:a1600a4c9f1d32c7b9a8e13b58732260d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90a5cc295836028d05c1094858196ba4" id="r_a90a5cc295836028d05c1094858196ba4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90a5cc295836028d05c1094858196ba4">StackPop</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk, <a class="el" href="#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> *var)</td></tr>
 <tr class="separator:a90a5cc295836028d05c1094858196ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a924a150a69d0b3cf306189c063d9a361" id="r_a924a150a69d0b3cf306189c063d9a361"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a924a150a69d0b3cf306189c063d9a361">StackPush</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk, <a class="el" href="#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value)</td></tr>
 <tr class="separator:a924a150a69d0b3cf306189c063d9a361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3a4bfe2a275e9392dbbce9abdca04d" id="r_acd3a4bfe2a275e9392dbbce9abdca04d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd3a4bfe2a275e9392dbbce9abdca04d">StackResizeDown</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk)</td></tr>
+<tr class="separator:acd3a4bfe2a275e9392dbbce9abdca04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a1cbe7084271102ccf1ba1c81d5935b" id="r_a8a1cbe7084271102ccf1ba1c81d5935b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a1cbe7084271102ccf1ba1c81d5935b">StackResizeUp</a> (<a class="el" href="structstack__t.html">stack_t</a> *stk)</td></tr>
+<tr class="separator:a8a1cbe7084271102ccf1ba1c81d5935b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -353,8 +356,8 @@ autotoc_md3</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md6"></a>
-autotoc_md6</h2>
+<h2><a class="anchor" id="autotoc_md4"></a>
+autotoc_md4</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
@@ -385,8 +388,8 @@ autotoc_md6</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md7"></a>
-autotoc_md7</h2>
+<h2><a class="anchor" id="autotoc_md5"></a>
+autotoc_md5</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
@@ -417,8 +420,8 @@ autotoc_md7</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md8"></a>
-autotoc_md8</h2>
+<h2><a class="anchor" id="autotoc_md6"></a>
+autotoc_md6</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
@@ -444,8 +447,8 @@ autotoc_md8</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md4"></a>
-autotoc_md4</h2>
+<h2><a class="anchor" id="autotoc_md7"></a>
+autotoc_md7</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
@@ -471,8 +474,8 @@ autotoc_md4</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md5"></a>
-autotoc_md5</h2>
+<h2><a class="anchor" id="autotoc_md8"></a>
+autotoc_md8</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>

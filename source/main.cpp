@@ -30,12 +30,17 @@ CodeError run_program()
     printf("begin\n");
     for (StackElem_t i = 2; i < 100; i++)
     {
-        if ((code_err = StackPush(&stack, i)) != NO_ERROR)
+        if ((code_err = StackPush(&stack, i%9)) != NO_ERROR)
             return code_err;
 
-        printf("num_to_put = %d, stack_idx = %d, stack_size = %d\n", i, stack.index, stack.capacity);
+        printf("num_to_put = %d, stack_idx = %d, stack_capacity = %d\n", stack.data[stack.index-1], stack.index, stack.capacity);
         numbers_counter++;
     }
+
+    // IF I WANT TO CALL StackDump() ----->
+    // for (int i = 10; i < 20; i++)
+    //     stack.data[i] = 10;
+    // <-----------------------------------
 
     int printed_numbers_counter = 0;
     StackElem_t var_for_print = 0;
@@ -45,7 +50,7 @@ CodeError run_program()
         if ((code_err = StackPop(&stack, &var_for_print)) != NO_ERROR)
             return code_err;
 
-        printf("var_for_print = %d, stack_idx = %d, stack_size = %d\n", var_for_print, stack.index, stack.capacity);
+        printf("var_for_print = %d, stack_idx = %d, stack_capacity = %d\n", var_for_print, stack.index, stack.capacity);
         printed_numbers_counter++;
     }
 
