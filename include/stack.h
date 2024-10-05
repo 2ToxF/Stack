@@ -75,7 +75,7 @@ const int RESIZE_COEF_DOWN = RESIZE_COEF * 2;
 const canary_t STACK_CANARY_VALUE = 0xBAD57ACCBAD57ACC;
 
 /// @brief Canary value for securing stack elements
-const canary_t DATA_CANARY_VALUE  = 0xBADDA7A0BADDA7A0;
+const canary_t DATA_CANARY_VALUE  = 0;
 
 /// @brief Size of all canaries
 const size_t SIZE_OF_CANARY       = sizeof(canary_t);

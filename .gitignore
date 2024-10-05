@@ -3,3 +3,8 @@
 
 # folders
 object/
+
+
+# ONLY FOR STACK WITH VULNERABILITIES
+documentation/
+Docs_config

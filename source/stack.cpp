@@ -65,10 +65,7 @@ CodeError StackHashStruct(stack_t* stk)
     const size_t sizeof_stk_struct = sizeof(*stk);
 
     for (size_t i = 0; i < sizeof_stk_struct; i++)
-    {
-        calc_hash = ((calc_hash << HASH_SHIFT_COEF) + calc_hash) + *cur_byte;
-        cur_byte++;
-    }
+        calc_hash += *cur_byte;
 
     stk->hash_struct = calc_hash;
     stk->hash_data = temp_hash_data;
