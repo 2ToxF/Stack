@@ -130,18 +130,4 @@ CodeError StackPop       (stack_t* stk, StackElem_t* var);
     ----------------------------------------------------------------------------------------------------- */
 CodeError StackPush      (stack_t* stk, StackElem_t value);
 
-/*! -----------------------------------------------------------------------------------------------------
-    Downsizes the stack
-    \param[in, out]  stk  Pointer to stack sructure
-    \return Type of code error or 0 for "no error"-state
-    ----------------------------------------------------------------------------------------------------- */
-CodeError StackResizeDown(stack_t* stk);
-
-/*! -----------------------------------------------------------------------------------------------------
-    Upsizes the stack
-    \param[in, out]  stk  Pointer to stack sructure
-    \return Type of code error or 0 for "no error"-state
-    ----------------------------------------------------------------------------------------------------- */
-CodeError StackResizeUp  (stack_t* stk);
-
 #endif

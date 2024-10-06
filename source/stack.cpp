@@ -5,6 +5,20 @@
 #include "stack.h"
 #include "verify.h"
 
+/*! -----------------------------------------------------------------------------------------------------
+    Downsizes the stack
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+static CodeError StackResizeDown(stack_t* stk);
+
+/*! -----------------------------------------------------------------------------------------------------
+    Upsizes the stack
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+static CodeError StackResizeUp  (stack_t* stk);
+
 //----------------------------------------------------------------------------------------------------------------------
 
 static const int HASH_SHIFT_COEF = 5;
