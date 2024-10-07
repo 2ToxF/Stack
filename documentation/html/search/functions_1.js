@@ -7,7 +7,5 @@ var searchData=
   ['stackinit_4',['StackInit',['../stack_8h.html#a1600a4c9f1d32c7b9a8e13b58732260d',1,'stack.cpp']]],
   ['stackpop_5',['StackPop',['../stack_8h.html#a90a5cc295836028d05c1094858196ba4',1,'stack.cpp']]],
   ['stackpush_6',['StackPush',['../stack_8h.html#a924a150a69d0b3cf306189c063d9a361',1,'stack.cpp']]],
-  ['stackresizedown_7',['StackResizeDown',['../stack_8h.html#acd3a4bfe2a275e9392dbbce9abdca04d',1,'stack.cpp']]],
-  ['stackresizeup_8',['StackResizeUp',['../stack_8h.html#a8a1cbe7084271102ccf1ba1c81d5935b',1,'stack.cpp']]],
-  ['stackverify_9',['StackVerify',['../verify_8h.html#abad8304b3a6a2d2c6178e9c4d11bab2f',1,'verify.cpp']]]
+  ['stackverify_7',['StackVerify',['../verify_8h.html#abad8304b3a6a2d2c6178e9c4d11bab2f',1,'verify.cpp']]]
 ];
