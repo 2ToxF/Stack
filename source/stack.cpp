@@ -1,9 +1,75 @@
-#include <stdlib.h>
-#include <string.h>
+/*!
+    \file
+    File with constructions for main work with stack
+*/
 
-#include "input_output.h"
+#include <stdarg.h>
+
 #include "stack.h"
-#include "verify.h"
+
+/// @brief Type of canaries on the stack sides
+typedef uint64_t canary_t;
+
+/// @brief Default number of elements that can be put to stack
+static const size_t DEFAULT_STK_CAPACITY = 512;
+
+/// @brief Coefficeint for upsizing stack
+static const int RESIZE_COEF      = 2;
+
+/// @brief Coefficient that sets ratio of minimum and maximum number of elements (except default capacity)
+static const int RESIZE_COEF_DOWN = RESIZE_COEF * 2;
+
+/// @brief Canary value for securing stack structure
+static const canary_t STACK_CANARY_VALUE = 0xBAD57ACCBAD57ACC;
+
+/// @brief Canary value for securing stack elements
+static const canary_t DATA_CANARY_VALUE  = 0xBADDA7A0BADDA7A0;
+
+/// @brief Size of all canaries
+static const size_t SIZE_OF_CANARY       = sizeof(canary_t);
+
+/// @brief Number of bits temporary hash should shift by
+static const int           HASH_SHIFT_COEF = 5;
+
+/// @brief Start value of temporary hash
+static const unsigned long START_HASH      = 5381;
+
+/// @brief Sructure with stack info
+struct stack_t
+{
+    canary_t left_canary;
+    ON_DEBUG(const char* stk_name);
+    ON_DEBUG(const char* init_file);
+    ON_DEBUG(int init_line);
+    ON_DEBUG(const char* init_func);
+    unsigned long hash_struct;
+    unsigned long hash_data;
+    StackElem_t* data;
+    int index;
+    int capacity;
+    canary_t right_canary;
+};
+
+/*! -----------------------------------------------------------------------------------------------------
+    Calculates both structure and data (elements) hashes of stack
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+static CodeError StackHash      (stack_t* stk);
+
+/*! -----------------------------------------------------------------------------------------------------
+    Calculates stack data (elements) hash using DJB2-algorithm
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+static CodeError StackHashData  (stack_t* stk);
+
+/*! -----------------------------------------------------------------------------------------------------
+    Calculates stack structure hash using DJB2-algorithm
+    \param[in, out]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+    ----------------------------------------------------------------------------------------------------- */
+static CodeError StackHashStruct(stack_t* stk);
 
 /*! -----------------------------------------------------------------------------------------------------
     Downsizes the stack
@@ -19,23 +85,35 @@ static CodeError StackResizeDown(stack_t* stk);
     ----------------------------------------------------------------------------------------------------- */
 static CodeError StackResizeUp  (stack_t* stk);
 
-//----------------------------------------------------------------------------------------------------------------------
+/*!
+    Verifies stack's sructure and data (elements)
+    \param[in]  stk  Pointer to stack sructure
+    \return Type of code error or 0 for "no error"-state
+*/
+static CodeError StackVerify(stack_t* stk);
 
-static const int HASH_SHIFT_COEF = 5;
-static const unsigned long START_HASH = 5381;
 
-//----------------------------------------------------------------------------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//----------------------------------------------------------------------------------------------------------------
+// ------> !!! STACK PART !!! <-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-void StackDtor(stack_t* stk)
+
+CodeError StackDtor(stack_t* stk)
 {
+    STACK_VERIFY(stk);
+
     free((char*) stk->data - SIZE_OF_CANARY); stk->data = NULL;
     stk->index = 0;
     stk->capacity = 0;
+
+    return NO_ERROR;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackHash(stack_t* stk)
+static CodeError StackHash(stack_t* stk)
 {
     CodeError code_err = NO_ERROR;
 
@@ -50,7 +128,7 @@ CodeError StackHash(stack_t* stk)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackHashData(stack_t* stk)
+static CodeError StackHashData(stack_t* stk)
 {
     stk->hash_data = 0;
     unsigned long calc_hash = START_HASH;
@@ -68,7 +146,7 @@ CodeError StackHashData(stack_t* stk)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackHashStruct(stack_t* stk)
+static CodeError StackHashStruct(stack_t* stk)
 {
     stk->hash_struct = 0;
     unsigned long temp_hash_data = stk->hash_data;
@@ -91,7 +169,8 @@ CodeError StackHashStruct(stack_t* stk)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackInit(stack_t* stk)
+CodeError StackInit(stack_t* stk, const char* stk_name, const char* stk_init_file,
+                    int stk_init_line, const char* stk_init_func)
 {
     #ifndef NDEBUG
         if (stk->data != NULL || stk->index != 0 || stk->capacity != 0)
@@ -99,6 +178,11 @@ CodeError StackInit(stack_t* stk)
             StackDump(stk, __FILE__, __LINE__);
             return STACK_ALREADY_INITED_ERR;
         }
+
+        stk->stk_name = stk_name;
+        stk->init_file = stk_init_file;
+        stk->init_line = stk_init_line;
+        stk->init_func = stk_init_func;
     #endif
 
     stk->left_canary = stk->right_canary = STACK_CANARY_VALUE;
@@ -165,7 +249,7 @@ CodeError StackPush(stack_t* stk, StackElem_t value)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackResizeDown(stack_t* stk)
+static CodeError StackResizeDown(stack_t* stk)
 {
     STACK_VERIFY(stk);
 
@@ -186,7 +270,7 @@ CodeError StackResizeDown(stack_t* stk)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackResizeUp(stack_t* stk)
+static CodeError StackResizeUp(stack_t* stk)
 {
     STACK_VERIFY(stk);
 
@@ -204,3 +288,133 @@ CodeError StackResizeUp(stack_t* stk)
     STACK_VERIFY(stk);
     return NO_ERROR;
 }
+
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//----------------------------------------------------------------------------------------------------------------
+// ------> !!! VERIFY PART !!! <----------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+static CodeError StackVerify(stack_t* stk)
+{
+    #ifndef NDEBUG
+        if (stk == NULL)
+            return NULL_STK_STRUCT_PTR_ERR;
+        if (stk->data == NULL)
+            return NULL_STK_DATA_PTR_ERR;
+        if (stk->capacity < 0)
+            return NEG_STK_CAPACITY_ERR;
+
+        if (stk->index < 0)
+            return STACK_ANTIOVERFLOW_ERR;
+        if (stk->index >= stk->capacity)
+            return STACK_OVERFLOW_ERR;
+        if (stk->index < stk->capacity / RESIZE_COEF_DOWN - 1 && (size_t) stk->capacity > DEFAULT_STK_CAPACITY)
+            return STACK_USES_MUCH_MEM_ERR;
+    #endif
+
+    if (stk->left_canary != STACK_CANARY_VALUE || stk->right_canary != STACK_CANARY_VALUE)
+        return STKSTRUCT_CANARY_CORRUPT_ERR;
+    if (*((canary_t*) ((char*) stk->data - SIZE_OF_CANARY)) != DATA_CANARY_VALUE
+        || *((canary_t*) (stk->data + stk->capacity)) != DATA_CANARY_VALUE)
+        return STKDATA_CANARY_CORRUPT_ERR;
+
+    unsigned long temp_hash_data = stk->hash_data, temp_hash_struct = stk->hash_struct;
+    StackHash(stk);
+    if (temp_hash_struct != stk->hash_struct)
+        return STKSTRUCT_INFO_CORRUPT_ERR;
+    if (temp_hash_data != stk->hash_data)
+        return STKDATA_INFO_CORRUPT_ERR;
+
+    return NO_ERROR;
+}
+
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//----------------------------------------------------------------------------------------------------------------
+// ------> !!! INPUT/OUTPUT PART !!! <----------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+void print_code_error(CodeError code_error)
+{
+    #define ERR_DESCR_(error)                                   \
+        case (error):                                           \
+            printf("\n\n" RED "CODE_ERROR: " #error WHT "\n");  \
+            break
+
+    switch(code_error)
+    {
+        case NO_ERROR:
+            printf("\n\n" GRN "Code was completed without errors" WHT "\n");
+            break;
+
+        ERR_DESCR_(STACK_ALREADY_INITED_ERR);
+        ERR_DESCR_(NULL_STK_STRUCT_PTR_ERR);
+        ERR_DESCR_(NULL_STK_DATA_PTR_ERR);
+        ERR_DESCR_(NEG_STK_CAPACITY_ERR);
+        ERR_DESCR_(STACK_ANTIOVERFLOW_ERR);
+        ERR_DESCR_(STACK_OVERFLOW_ERR);
+        ERR_DESCR_(OUT_OF_MEMORY_ERR);
+        ERR_DESCR_(STACK_USES_MUCH_MEM_ERR);
+        ERR_DESCR_(STKSTRUCT_CANARY_CORRUPT_ERR);
+        ERR_DESCR_(STKDATA_CANARY_CORRUPT_ERR);
+        ERR_DESCR_(STKSTRUCT_INFO_CORRUPT_ERR);
+        ERR_DESCR_(STKDATA_INFO_CORRUPT_ERR);
+
+        default:
+            printf("\n\n" RED "CODE_ERROR: UNKNOWN_ERROR" WHT "\n");
+            break;
+    }
+
+    #undef ERR_DESCR_
+}
+
+
+#ifndef NDEBUG
+    void StackDump(const stack_t* stk, const char* file_name, int line_number)
+    {
+        int idx_first_of_same = 0;
+        char index_string[12] = {};
+
+        #define PRINT_CELLS_VALUE_(idx)                                             \
+            {                                                                       \
+                if (idx_first_of_same == (idx))                                     \
+                    sprintf(index_string, "*[%d]", (idx));                          \
+                else                                                                \
+                    sprintf(index_string, "*[%d - %d]", idx_first_of_same, (idx));  \
+                printf("\t\t%-12s  =  %d\n", index_string, stk->data[idx]);         \
+                idx_first_of_same = (idx + 1);                                      \
+            }
+
+
+        printf(RED "stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
+            stk->stk_name, stk,
+            file_name, line_number,
+            stk->init_file, stk->init_line, stk->init_func);
+        printf(GRN "{\n"
+            "%-10s= %d\n"
+            "%-10s= %d\n"
+            "\n"
+            MAG "\tdata [0x%p]:\n"
+            CYN "\t{\n",
+            "\tindex", stk->index,
+            "\tcapacity", stk->capacity,
+            stk->data);
+
+        for (int i = 1; i < stk->capacity; i++)
+        {
+            if (stk->data[i] != stk->data[i-1])
+                PRINT_CELLS_VALUE_(i-1);
+        }
+        PRINT_CELLS_VALUE_(stk->capacity-1);
+
+        printf("\t}\n"
+            GRN "}\n" WHT);
+
+        #undef PRINT_CELLS_VALUE
+    }
+#endif

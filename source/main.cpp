@@ -22,7 +22,7 @@ CodeError run_program()
 {
     CodeError code_err = NO_ERROR;
 
-    stack_t stack = CREATE_STACK(stack);
+    stack_t* stack = NULL;
     if ((code_err = StackInit(&stack)) != NO_ERROR)
         return code_err;
 

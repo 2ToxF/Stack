@@ -8,16 +8,15 @@ I guess all of you know what stack is. And that's my variation that I'm going to
 Just download files from include/ and source/ (you do not need my "main.cpp") and include "stack.h" to your project.
 
 ## Usage
-All functions, except of `StackDtor()`, returns value of "CodeError" data type.
+All functions return value of "CodeError" data type.
 
 ```c
 List of the most important functions:
 
     StackInit(stack_t* stk)                     //  initialazes the stack (not creating!!!)
     StackDtor(stack_t* stk)                     //  destructs the stack
-    StackHash(stack_t* stk)                     //  calculates hash of the stack
     StackPush(stack_t* stk, StackElem_t value)  //  puts value to stack
-    StackPop (stack_t* stk, StackElem_t* var)   //  pulls value from stack
+    StackPop(stack_t* stk, StackElem_t* var)    //  pulls value from stack
 ```
 
 ## Contributing and feedback
