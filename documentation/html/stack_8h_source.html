@@ -96,104 +96,67 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef STACK_H</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define STACK_H</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="debug__mode_8h.html">debug_mode.h</a>&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="debug__mode_8h.html">debug_mode.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#ifndef NDEBUG</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define ON_DEBUG(...) __VA_ARGS__</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define CREATE_STACK(stk) {0, #stk, __FILE__, __LINE__, __func__}</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">   20</a></span><span class="preprocessor">#define ON_DEBUG(...)</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="stack_8h.html#a19f97444e061d6366662a29a783cc089">   22</a></span><span class="preprocessor">#define CREATE_STACK(stk) {}</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">   26</a></span><span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">   29</a></span><span class="keyword">typedef</span> uint64_t <a class="code hl_typedef" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">   32</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    NO_ERROR,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    STACK_ALREADY_INITED_ERR,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    NULL_STK_STRUCT_PTR_ERR,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NULL_STK_DATA_PTR_ERR,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    NEG_STK_CAPACITY_ERR,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    STACK_ANTIOVERFLOW_ERR,</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    STACK_OVERFLOW_ERR,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    OUT_OF_MEMORY_ERR,</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    STACK_USES_MUCH_MEM_ERR,</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    STKSTRUCT_CANARY_CORRUPT_ERR,</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    STKDATA_CANARY_CORRUPT_ERR,</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    STKSTRUCT_INFO_CORRUPT_ERR,</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    STKDATA_INFO_CORRUPT_ERR,</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define BLK &quot;\033[0;30m&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define RED &quot;\033[0;31m&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define GRN &quot;\033[0;32m&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define YEL &quot;\033[0;33m&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define BLU &quot;\033[0;34m&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define MAG &quot;\033[0;35m&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define CYN &quot;\033[0;36m&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define WHT &quot;\033[0;37m&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#ifndef NDEBUG</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">   22</a></span><span class="preprocessor">#define ON_DEBUG(...) __VA_ARGS__</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="stack_8h.html#adb2828f07099e672463abe8410adaf5b">   24</a></span><span class="preprocessor">#define CREATE_STACK(stk_enc_ptr) StackInit(stk_enc_ptr, #stk_enc_ptr, __FILE__, __LINE__, __PRETTY_FUNCTION__)</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define ON_DEBUG(...)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#define CREATE_STACK(stk_enc_ptr) StackInit(stk_enc_ptr, NULL, NULL, NULL, NULL)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">   33</a></span><span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">   36</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    NO_ERROR,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    CANT_CREATE_RAND_NUM_ERR,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    STACK_ALREADY_INITED_ERR,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    NULL_STK_STRUCT_PTR_ERR,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    NULL_STK_DATA_PTR_ERR,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    NEG_STK_CAPACITY_ERR,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    STACK_ANTIOVERFLOW_ERR,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    STACK_OVERFLOW_ERR,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    OUT_OF_MEMORY_ERR,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    STACK_USES_MUCH_MEM_ERR,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    STKSTRUCT_CANARY_CORRUPT_ERR,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    STKDATA_CANARY_CORRUPT_ERR,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    STKSTRUCT_INFO_CORRUPT_ERR,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    STKDATA_INFO_CORRUPT_ERR,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
 </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="};">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structstack__t.html">   50</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structstack__t.html">stack_t</a></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_typedef" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a> left_canary;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_define" href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">ON_DEBUG</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* stk_name);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_define" href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">ON_DEBUG</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* init_file);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_define" href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">ON_DEBUG</a>(<span class="keywordtype">int</span> init_line);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_define" href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">ON_DEBUG</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* init_func);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> hash_struct;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> hash_data;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>* data;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">int</span> index;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">int</span> capacity;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_typedef" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a> right_canary;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>};</div>
-</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="stack_8h.html#aa554aef23f9707fdb1e7691530259481">   66</a></span><span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_variable" href="stack_8h.html#aa554aef23f9707fdb1e7691530259481">DEFAULT_STK_CAPACITY</a> = 8;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="stack_8h.html#a09b4dfab0c89912c73bdd68923d1f2f8">   69</a></span><span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="stack_8h.html#a09b4dfab0c89912c73bdd68923d1f2f8">RESIZE_COEF</a>      = 2;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="stack_8h.html#acd39ec2282cd555d99c21c3f5845d92a">   72</a></span><span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="stack_8h.html#acd39ec2282cd555d99c21c3f5845d92a">RESIZE_COEF_DOWN</a> = <a class="code hl_variable" href="stack_8h.html#a09b4dfab0c89912c73bdd68923d1f2f8">RESIZE_COEF</a> * 2;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="stack_8h.html#af7ebb6331d94a2f6c321384e8743056a">   75</a></span><span class="keyword">const</span> <a class="code hl_typedef" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a> <a class="code hl_variable" href="stack_8h.html#af7ebb6331d94a2f6c321384e8743056a">STACK_CANARY_VALUE</a> = 0xBAD57ACCBAD57ACC;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="stack_8h.html#a8a401c5b1b3e9d5599f766e1c060e02b">   78</a></span><span class="keyword">const</span> <a class="code hl_typedef" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a> <a class="code hl_variable" href="stack_8h.html#a8a401c5b1b3e9d5599f766e1c060e02b">DATA_CANARY_VALUE</a>  = 0xBADDA7A0BADDA7A0;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="stack_8h.html#a2c8db6997ee5d91851d1c3b16fed9351">   81</a></span><span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_variable" href="stack_8h.html#a2c8db6997ee5d91851d1c3b16fed9351">SIZE_OF_CANARY</a>       = <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">struct </span><a class="code hl_struct" href="structstack__t.html">stack_t</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#ae003ac2f082ded3119f6c2c7b6eb3651">StackDtor</a>      (<span class="keywordtype">size_t</span>* stk_enc_ptr);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a>      (<span class="keywordtype">size_t</span>* stk_enc_ptr, <span class="keyword">const</span> <span class="keywordtype">char</span>* stk_name, <span class="keyword">const</span> <span class="keywordtype">char</span>* stk_init_file,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                          <span class="keywordtype">int</span> stk_init_line, <span class="keyword">const</span> <span class="keywordtype">char</span>* stk_init_func);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#ac101f32b1c286f0bd6721fae85f52945">StackPop</a>       (<span class="keywordtype">size_t</span> stk_enc_ptr, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>* var);</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordtype">void</span>      <a class="code hl_function" href="stack_8h.html#ad67c4445b09d694a85da6ea407aaae52">StackDtor</a>      (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#aea38482d61370bd16f3abefb58ec2448">StackHash</a>      (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#aa137db29b47216a444abd6b2762aaee9">StackHashData</a>  (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#ab211be79a1e6df2d3df33500f96f9167">StackHashStruct</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#a1600a4c9f1d32c7b9a8e13b58732260d">StackInit</a>      (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#a90a5cc295836028d05c1094858196ba4">StackPop</a>       (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>* var);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#a924a150a69d0b3cf306189c063d9a361">StackPush</a>      (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><a class="code hl_enumeration" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> <a class="code hl_function" href="stack_8h.html#a36b84d9fff9c3d894301d8d3e459b8f3">StackPush</a>      (<span class="keywordtype">size_t</span> stk_enc_ptr, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adebug__mode_8h_html"><div class="ttname"><a href="debug__mode_8h.html">debug_mode.h</a></div></div>
-<div class="ttc" id="astack_8h_html_a09b4dfab0c89912c73bdd68923d1f2f8"><div class="ttname"><a href="stack_8h.html#a09b4dfab0c89912c73bdd68923d1f2f8">RESIZE_COEF</a></div><div class="ttdeci">const int RESIZE_COEF</div><div class="ttdoc">Coefficeint for upsizing stack.</div><div class="ttdef"><b>Definition</b> stack.h:69</div></div>
-<div class="ttc" id="astack_8h_html_a1600a4c9f1d32c7b9a8e13b58732260d"><div class="ttname"><a href="stack_8h.html#a1600a4c9f1d32c7b9a8e13b58732260d">StackInit</a></div><div class="ttdeci">CodeError StackInit(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:94</div></div>
-<div class="ttc" id="astack_8h_html_a1bdd7c1369b250215a080e8421d4ecf3"><div class="ttname"><a href="stack_8h.html#a1bdd7c1369b250215a080e8421d4ecf3">ON_DEBUG</a></div><div class="ttdeci">#define ON_DEBUG(...)</div><div class="ttdoc">Is replaced with it's arguements only in debug mode.</div><div class="ttdef"><b>Definition</b> stack.h:20</div></div>
-<div class="ttc" id="astack_8h_html_a2c8db6997ee5d91851d1c3b16fed9351"><div class="ttname"><a href="stack_8h.html#a2c8db6997ee5d91851d1c3b16fed9351">SIZE_OF_CANARY</a></div><div class="ttdeci">const size_t SIZE_OF_CANARY</div><div class="ttdoc">Size of all canaries.</div><div class="ttdef"><b>Definition</b> stack.h:81</div></div>
-<div class="ttc" id="astack_8h_html_a4890027e84c3d8fa2a1701b5689a10ad"><div class="ttname"><a href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a></div><div class="ttdeci">CodeError</div><div class="ttdoc">Enumerated types of code errors or 0 for &quot;no error&quot;-state.</div><div class="ttdef"><b>Definition</b> stack.h:33</div></div>
-<div class="ttc" id="astack_8h_html_a8a401c5b1b3e9d5599f766e1c060e02b"><div class="ttname"><a href="stack_8h.html#a8a401c5b1b3e9d5599f766e1c060e02b">DATA_CANARY_VALUE</a></div><div class="ttdeci">const canary_t DATA_CANARY_VALUE</div><div class="ttdoc">Canary value for securing stack elements.</div><div class="ttdef"><b>Definition</b> stack.h:78</div></div>
-<div class="ttc" id="astack_8h_html_a90a5cc295836028d05c1094858196ba4"><div class="ttname"><a href="stack_8h.html#a90a5cc295836028d05c1094858196ba4">StackPop</a></div><div class="ttdeci">CodeError StackPop(stack_t *stk, StackElem_t *var)</div><div class="ttdef"><b>Definition</b> stack.cpp:121</div></div>
-<div class="ttc" id="astack_8h_html_a924a150a69d0b3cf306189c063d9a361"><div class="ttname"><a href="stack_8h.html#a924a150a69d0b3cf306189c063d9a361">StackPush</a></div><div class="ttdeci">CodeError StackPush(stack_t *stk, StackElem_t value)</div><div class="ttdef"><b>Definition</b> stack.cpp:149</div></div>
-<div class="ttc" id="astack_8h_html_a948a39d366c8d57e2573ab55863e1911"><div class="ttname"><a href="stack_8h.html#a948a39d366c8d57e2573ab55863e1911">canary_t</a></div><div class="ttdeci">uint64_t canary_t</div><div class="ttdoc">Type of canaries on the stack sides.</div><div class="ttdef"><b>Definition</b> stack.h:29</div></div>
-<div class="ttc" id="astack_8h_html_aa137db29b47216a444abd6b2762aaee9"><div class="ttname"><a href="stack_8h.html#aa137db29b47216a444abd6b2762aaee9">StackHashData</a></div><div class="ttdeci">CodeError StackHashData(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:53</div></div>
-<div class="ttc" id="astack_8h_html_aa554aef23f9707fdb1e7691530259481"><div class="ttname"><a href="stack_8h.html#aa554aef23f9707fdb1e7691530259481">DEFAULT_STK_CAPACITY</a></div><div class="ttdeci">const size_t DEFAULT_STK_CAPACITY</div><div class="ttdoc">Default number of elements that can be put to stack.</div><div class="ttdef"><b>Definition</b> stack.h:66</div></div>
-<div class="ttc" id="astack_8h_html_ab211be79a1e6df2d3df33500f96f9167"><div class="ttname"><a href="stack_8h.html#ab211be79a1e6df2d3df33500f96f9167">StackHashStruct</a></div><div class="ttdeci">CodeError StackHashStruct(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:71</div></div>
-<div class="ttc" id="astack_8h_html_acd39ec2282cd555d99c21c3f5845d92a"><div class="ttname"><a href="stack_8h.html#acd39ec2282cd555d99c21c3f5845d92a">RESIZE_COEF_DOWN</a></div><div class="ttdeci">const int RESIZE_COEF_DOWN</div><div class="ttdoc">Coefficient that sets ratio of minimum and maximum number of elements (except default capacity)</div><div class="ttdef"><b>Definition</b> stack.h:72</div></div>
-<div class="ttc" id="astack_8h_html_ad060f460c093578e6a06c3c6fd730857"><div class="ttname"><a href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a></div><div class="ttdeci">int StackElem_t</div><div class="ttdoc">Type of stack elements.</div><div class="ttdef"><b>Definition</b> stack.h:26</div></div>
-<div class="ttc" id="astack_8h_html_ad67c4445b09d694a85da6ea407aaae52"><div class="ttname"><a href="stack_8h.html#ad67c4445b09d694a85da6ea407aaae52">StackDtor</a></div><div class="ttdeci">void StackDtor(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:29</div></div>
-<div class="ttc" id="astack_8h_html_aea38482d61370bd16f3abefb58ec2448"><div class="ttname"><a href="stack_8h.html#aea38482d61370bd16f3abefb58ec2448">StackHash</a></div><div class="ttdeci">CodeError StackHash(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:38</div></div>
-<div class="ttc" id="astack_8h_html_af7ebb6331d94a2f6c321384e8743056a"><div class="ttname"><a href="stack_8h.html#af7ebb6331d94a2f6c321384e8743056a">STACK_CANARY_VALUE</a></div><div class="ttdeci">const canary_t STACK_CANARY_VALUE</div><div class="ttdoc">Canary value for securing stack structure.</div><div class="ttdef"><b>Definition</b> stack.h:75</div></div>
-<div class="ttc" id="astructstack__t_html"><div class="ttname"><a href="structstack__t.html">stack_t</a></div><div class="ttdoc">Sructure with stack info.</div><div class="ttdef"><b>Definition</b> stack.h:51</div></div>
+<div class="ttc" id="astack_8h_html_a36b84d9fff9c3d894301d8d3e459b8f3"><div class="ttname"><a href="stack_8h.html#a36b84d9fff9c3d894301d8d3e459b8f3">StackPush</a></div><div class="ttdeci">CodeError StackPush(size_t stk_enc_ptr, StackElem_t value)</div><div class="ttdef"><b>Definition</b> stack.cpp:299</div></div>
+<div class="ttc" id="astack_8h_html_a4890027e84c3d8fa2a1701b5689a10ad"><div class="ttname"><a href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a></div><div class="ttdeci">CodeError</div><div class="ttdoc">Enumerated types of code errors or 0 for &quot;no error&quot;-state.</div><div class="ttdef"><b>Definition</b> stack.h:37</div></div>
+<div class="ttc" id="astack_8h_html_a913b5776681c6c1fe579e0aba4c6a767"><div class="ttname"><a href="stack_8h.html#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a></div><div class="ttdeci">CodeError StackInit(size_t *stk_enc_ptr, const char *stk_name, const char *stk_init_file, int stk_init_line, const char *stk_init_func)</div><div class="ttdef"><b>Definition</b> stack.cpp:225</div></div>
+<div class="ttc" id="astack_8h_html_ac101f32b1c286f0bd6721fae85f52945"><div class="ttname"><a href="stack_8h.html#ac101f32b1c286f0bd6721fae85f52945">StackPop</a></div><div class="ttdeci">CodeError StackPop(size_t stk_enc_ptr, StackElem_t *var)</div><div class="ttdef"><b>Definition</b> stack.cpp:269</div></div>
+<div class="ttc" id="astack_8h_html_ad060f460c093578e6a06c3c6fd730857"><div class="ttname"><a href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a></div><div class="ttdeci">int StackElem_t</div><div class="ttdoc">Type of stack elements.</div><div class="ttdef"><b>Definition</b> stack.h:33</div></div>
+<div class="ttc" id="astack_8h_html_ae003ac2f082ded3119f6c2c7b6eb3651"><div class="ttname"><a href="stack_8h.html#ae003ac2f082ded3119f6c2c7b6eb3651">StackDtor</a></div><div class="ttdeci">CodeError StackDtor(size_t *stk_enc_ptr)</div><div class="ttdoc">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...</div><div class="ttdef"><b>Definition</b> stack.cpp:151</div></div>
+<div class="ttc" id="astructstack__t_html"><div class="ttname"><a href="structstack__t.html">stack_t</a></div><div class="ttdoc">Sructure with stack info.</div><div class="ttdef"><b>Definition</b> stack.cpp:48</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

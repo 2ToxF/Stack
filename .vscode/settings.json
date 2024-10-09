@@ -30,6 +30,7 @@
         "system_error": "cpp",
         "text_encoding": "cpp",
         "typeinfo": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "compare": "cpp"
     }
 }

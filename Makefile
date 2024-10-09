@@ -5,6 +5,7 @@ DED_FLAGS := -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat
 	-Wformat=2 -Wignored-qualifiers -Wlogical-op -Wno-missing-field-initializers -Wnon-virtual-dtor \
 	-Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel \
 	-Wtype-limits -Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE
+ADD_FLAGS := -mrdrnd
 
 SRC_DIR := source
 INC_DIR := include
@@ -26,7 +27,7 @@ $(EXE): $(OBJECTS)
 	@$(CC) $(OBJECTS) -o $@
 
 $(OBJECTS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDES)
-	@$(CC) -c $(DED_FLAGS) -I$(INC_DIR) $< -o $@
+	@$(CC) -c $(DED_FLAGS) $(ADD_FLAGS) -I$(INC_DIR) $< -o $@
 
 run: $(EXE)
 	@$(EXE)
@@ -41,5 +42,5 @@ clean_obj:
 	rm $(OBJ_DIR)/*.o
 
 clean:
-	rm *.exe
 	rm $(OBJ_DIR)/*.o
+	rm *.exe

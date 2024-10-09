@@ -88,31 +88,29 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Toxic's Stack</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md7"></a></p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4"></a></p>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Description</h1>
 <p>I guess all of you know what stack is. And that's my variation that I'm going to use in my future projects.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Installation</h1>
 <p>Just download files from include/ and source/ (you do not need my "main.cpp") and include "stack.h" to your project.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Usage</h1>
-<p>All functions, except of <code><a class="el" href="stack_8h.html#ad67c4445b09d694a85da6ea407aaae52">StackDtor()</a></code>, returns value of "CodeError" data type.</p>
+<p>All functions return value of "CodeError" data type.</p>
 <div class="fragment"><div class="line">List of the most important functions:</div>
 <div class="line"> </div>
-<div class="line">    <a class="code hl_function" href="stack_8h.html#a1600a4c9f1d32c7b9a8e13b58732260d">StackInit</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk)                     <span class="comment">//  initialazes the stack (not creating!!!)</span></div>
-<div class="line">    <a class="code hl_function" href="stack_8h.html#ad67c4445b09d694a85da6ea407aaae52">StackDtor</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk)                     <span class="comment">//  destructs the stack</span></div>
-<div class="line">    <a class="code hl_function" href="stack_8h.html#aea38482d61370bd16f3abefb58ec2448">StackHash</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk)                     <span class="comment">//  calculates hash of the stack</span></div>
-<div class="line">    <a class="code hl_function" href="stack_8h.html#a924a150a69d0b3cf306189c063d9a361">StackPush</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value)  <span class="comment">//  puts value to stack</span></div>
-<div class="line">    <a class="code hl_function" href="stack_8h.html#a90a5cc295836028d05c1094858196ba4">StackPop</a> (<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>* var)   <span class="comment">//  pulls value from stack</span></div>
-<div class="ttc" id="astack_8h_html_a1600a4c9f1d32c7b9a8e13b58732260d"><div class="ttname"><a href="stack_8h.html#a1600a4c9f1d32c7b9a8e13b58732260d">StackInit</a></div><div class="ttdeci">CodeError StackInit(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:94</div></div>
-<div class="ttc" id="astack_8h_html_a90a5cc295836028d05c1094858196ba4"><div class="ttname"><a href="stack_8h.html#a90a5cc295836028d05c1094858196ba4">StackPop</a></div><div class="ttdeci">CodeError StackPop(stack_t *stk, StackElem_t *var)</div><div class="ttdef"><b>Definition</b> stack.cpp:121</div></div>
-<div class="ttc" id="astack_8h_html_a924a150a69d0b3cf306189c063d9a361"><div class="ttname"><a href="stack_8h.html#a924a150a69d0b3cf306189c063d9a361">StackPush</a></div><div class="ttdeci">CodeError StackPush(stack_t *stk, StackElem_t value)</div><div class="ttdef"><b>Definition</b> stack.cpp:149</div></div>
-<div class="ttc" id="astack_8h_html_ad060f460c093578e6a06c3c6fd730857"><div class="ttname"><a href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a></div><div class="ttdeci">int StackElem_t</div><div class="ttdoc">Type of stack elements.</div><div class="ttdef"><b>Definition</b> stack.h:26</div></div>
-<div class="ttc" id="astack_8h_html_ad67c4445b09d694a85da6ea407aaae52"><div class="ttname"><a href="stack_8h.html#ad67c4445b09d694a85da6ea407aaae52">StackDtor</a></div><div class="ttdeci">void StackDtor(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:29</div></div>
-<div class="ttc" id="astack_8h_html_aea38482d61370bd16f3abefb58ec2448"><div class="ttname"><a href="stack_8h.html#aea38482d61370bd16f3abefb58ec2448">StackHash</a></div><div class="ttdeci">CodeError StackHash(stack_t *stk)</div><div class="ttdef"><b>Definition</b> stack.cpp:38</div></div>
-<div class="ttc" id="astructstack__t_html"><div class="ttname"><a href="structstack__t.html">stack_t</a></div><div class="ttdoc">Sructure with stack info.</div><div class="ttdef"><b>Definition</b> stack.h:51</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
+<div class="line">    <a class="code hl_function" href="stack_8h.html#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk)                     <span class="comment">//  initialazes the stack (not creating!!!)</span></div>
+<div class="line">    <a class="code hl_function" href="stack_8h.html#ae003ac2f082ded3119f6c2c7b6eb3651">StackDtor</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk)                     <span class="comment">//  destructs the stack</span></div>
+<div class="line">    <a class="code hl_function" href="stack_8h.html#a36b84d9fff9c3d894301d8d3e459b8f3">StackPush</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value)  <span class="comment">//  puts value to stack</span></div>
+<div class="line">    <a class="code hl_function" href="stack_8h.html#ac101f32b1c286f0bd6721fae85f52945">StackPop</a>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk, <a class="code hl_typedef" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>* var)    <span class="comment">//  pulls value from stack</span></div>
+<div class="ttc" id="astack_8h_html_a36b84d9fff9c3d894301d8d3e459b8f3"><div class="ttname"><a href="stack_8h.html#a36b84d9fff9c3d894301d8d3e459b8f3">StackPush</a></div><div class="ttdeci">CodeError StackPush(size_t stk_enc_ptr, StackElem_t value)</div><div class="ttdef"><b>Definition</b> stack.cpp:299</div></div>
+<div class="ttc" id="astack_8h_html_a913b5776681c6c1fe579e0aba4c6a767"><div class="ttname"><a href="stack_8h.html#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a></div><div class="ttdeci">CodeError StackInit(size_t *stk_enc_ptr, const char *stk_name, const char *stk_init_file, int stk_init_line, const char *stk_init_func)</div><div class="ttdef"><b>Definition</b> stack.cpp:225</div></div>
+<div class="ttc" id="astack_8h_html_ac101f32b1c286f0bd6721fae85f52945"><div class="ttname"><a href="stack_8h.html#ac101f32b1c286f0bd6721fae85f52945">StackPop</a></div><div class="ttdeci">CodeError StackPop(size_t stk_enc_ptr, StackElem_t *var)</div><div class="ttdef"><b>Definition</b> stack.cpp:269</div></div>
+<div class="ttc" id="astack_8h_html_ad060f460c093578e6a06c3c6fd730857"><div class="ttname"><a href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a></div><div class="ttdeci">int StackElem_t</div><div class="ttdoc">Type of stack elements.</div><div class="ttdef"><b>Definition</b> stack.h:33</div></div>
+<div class="ttc" id="astack_8h_html_ae003ac2f082ded3119f6c2c7b6eb3651"><div class="ttname"><a href="stack_8h.html#ae003ac2f082ded3119f6c2c7b6eb3651">StackDtor</a></div><div class="ttdeci">CodeError StackDtor(size_t *stk_enc_ptr)</div><div class="ttdoc">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...</div><div class="ttdef"><b>Definition</b> stack.cpp:151</div></div>
+<div class="ttc" id="astructstack__t_html"><div class="ttname"><a href="structstack__t.html">stack_t</a></div><div class="ttdoc">Sructure with stack info.</div><div class="ttdef"><b>Definition</b> stack.cpp:48</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Contributing and feedback</h1>
 <p>You can always find me on VK 👉 <a href="https://vk.com/2toxicman">Toxic</a></p>
 <p>And also on Telegram 👉 <a href="t.me/ToxicF">Toxic</a></p>

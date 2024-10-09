@@ -3,12 +3,21 @@
     File with constructions for main work with stack
 */
 
+#include <limits.h>
 #include <stdarg.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "stack.h"
+#include "utils.h"
 
 /// @brief Type of canaries on the stack sides
 typedef uint64_t canary_t;
+
+/// @brief Key to find real pointer using XOR
+static size_t key_for_ptr_dec = 0;
 
 /// @brief Default number of elements that can be put to stack
 static const size_t DEFAULT_STK_CAPACITY = 512;
@@ -72,6 +81,13 @@ static CodeError StackHashData  (stack_t* stk);
 static CodeError StackHashStruct(stack_t* stk);
 
 /*! -----------------------------------------------------------------------------------------------------
+    Calculates the real pointer to stack structure using XOR with key_for_decode
+    \param[in]  ptr_do_decode  Encoded (decoded) pointer to stack sructure
+    \return Decoded (encoded) pointer to stack structure
+    ----------------------------------------------------------------------------------------------------- */
+static size_t    StackPtrXOR    (size_t ptr_to_decode);
+
+/*! -----------------------------------------------------------------------------------------------------
     Downsizes the stack
     \param[in, out]  stk  Pointer to stack sructure
     \return Type of code error or 0 for "no error"-state
@@ -93,6 +109,38 @@ static CodeError StackResizeUp  (stack_t* stk);
 static CodeError StackVerify(stack_t* stk);
 
 
+#ifndef NDEBUG
+    /*!
+        Prints stack info (ONLY DEFINED IN DEBUG MODE)
+        \param[in]  stk          Pointer to structure of stack that should be printed
+        \param[in]  file_name    Name of file where function was called
+        \param[in]  line_number  Number of line where function was called
+    */
+    void StackDump(const stack_t* stk, const char* file_name, int line_number);
+
+    /// @brief Macro for verifying stack
+    #define STACK_VERIFY(stk)                                    \
+        do                                                       \
+        {                                                        \
+            CodeError temp_code_err = NO_ERROR;                  \
+            if ((temp_code_err = StackVerify(stk)) != NO_ERROR)  \
+            {                                                    \
+                if (temp_code_err >= STACK_ANTIOVERFLOW_ERR)     \
+                    StackDump(stk, __FILE__, __LINE__);          \
+                return temp_code_err;                            \
+            }                                                    \
+        } while(0)
+#else
+    /// @brief Macro for verifying stack
+    #define STACK_VERIFY(stk)                                    \
+        do {                                                     \
+            CodeError temp_code_err = NO_ERROR;                  \
+            if ((temp_code_err = StackVerify(stk)) != NO_ERROR)  \
+                return temp_code_err;                            \
+        } while(0)
+#endif
+
+
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //----------------------------------------------------------------------------------------------------------------
 // ------> !!! STACK PART !!! <-----------------------------------------------------------------------------
@@ -100,13 +148,18 @@ static CodeError StackVerify(stack_t* stk);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-CodeError StackDtor(stack_t* stk)
+CodeError StackDtor(size_t* stk_enc_ptr)
 {
+    stack_t* stk = (stack_t*) StackPtrXOR(*stk_enc_ptr);
+
     STACK_VERIFY(stk);
 
     free((char*) stk->data - SIZE_OF_CANARY); stk->data = NULL;
     stk->index = 0;
     stk->capacity = 0;
+    free(stk); stk = NULL;
+
+    *stk_enc_ptr = 0;
 
     return NO_ERROR;
 }
@@ -169,9 +222,11 @@ static CodeError StackHashStruct(stack_t* stk)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackInit(stack_t* stk, const char* stk_name, const char* stk_init_file,
+CodeError StackInit(size_t* stk_enc_ptr, const char* stk_name, const char* stk_init_file,
                     int stk_init_line, const char* stk_init_func)
 {
+    stack_t* stk = (stack_t*) calloc(1, sizeof(stack_t));
+
     #ifndef NDEBUG
         if (stk->data != NULL || stk->index != 0 || stk->capacity != 0)
         {
@@ -185,6 +240,12 @@ CodeError StackInit(stack_t* stk, const char* stk_name, const char* stk_init_fil
         stk->init_func = stk_init_func;
     #endif
 
+    if (key_for_ptr_dec == 0)
+    {
+        if ((key_for_ptr_dec = MyGetRandom64()) == 0)
+            return CANT_CREATE_RAND_NUM_ERR;
+    }
+
     stk->left_canary = stk->right_canary = STACK_CANARY_VALUE;
 
     char* new_data = (char*) calloc(DEFAULT_STK_CAPACITY*sizeof(StackElem_t) + SIZE_OF_CANARY*2, sizeof(char));
@@ -197,13 +258,18 @@ CodeError StackInit(stack_t* stk, const char* stk_name, const char* stk_init_fil
 
     StackHash(stk);
     STACK_VERIFY(stk);
+
+    *stk_enc_ptr = StackPtrXOR((size_t) stk);
+
     return NO_ERROR;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackPop(stack_t* stk, StackElem_t* var)
+CodeError StackPop(size_t stk_enc_ptr, StackElem_t* var)
 {
+    stack_t* stk = (stack_t*) StackPtrXOR(stk_enc_ptr);
+
     STACK_VERIFY(stk);
 
     CodeError code_err = NO_ERROR;
@@ -230,8 +296,10 @@ CodeError StackPop(stack_t* stk, StackElem_t* var)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-CodeError StackPush(stack_t* stk, StackElem_t value)
+CodeError StackPush(size_t stk_enc_ptr, StackElem_t value)
 {
+    stack_t* stk = (stack_t*) StackPtrXOR(stk_enc_ptr);
+
     STACK_VERIFY(stk);
 
     CodeError code_err = NO_ERROR;
@@ -245,6 +313,13 @@ CodeError StackPush(stack_t* stk, StackElem_t value)
     StackHash(stk);
     STACK_VERIFY(stk);
     return NO_ERROR;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+static size_t StackPtrXOR(size_t ptr_to_decode)
+{
+    return ptr_to_decode ^ key_for_ptr_dec;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -337,41 +412,6 @@ static CodeError StackVerify(stack_t* stk)
 // ------> !!! INPUT/OUTPUT PART !!! <----------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-void print_code_error(CodeError code_error)
-{
-    #define ERR_DESCR_(error)                                   \
-        case (error):                                           \
-            printf("\n\n" RED "CODE_ERROR: " #error WHT "\n");  \
-            break
-
-    switch(code_error)
-    {
-        case NO_ERROR:
-            printf("\n\n" GRN "Code was completed without errors" WHT "\n");
-            break;
-
-        ERR_DESCR_(STACK_ALREADY_INITED_ERR);
-        ERR_DESCR_(NULL_STK_STRUCT_PTR_ERR);
-        ERR_DESCR_(NULL_STK_DATA_PTR_ERR);
-        ERR_DESCR_(NEG_STK_CAPACITY_ERR);
-        ERR_DESCR_(STACK_ANTIOVERFLOW_ERR);
-        ERR_DESCR_(STACK_OVERFLOW_ERR);
-        ERR_DESCR_(OUT_OF_MEMORY_ERR);
-        ERR_DESCR_(STACK_USES_MUCH_MEM_ERR);
-        ERR_DESCR_(STKSTRUCT_CANARY_CORRUPT_ERR);
-        ERR_DESCR_(STKDATA_CANARY_CORRUPT_ERR);
-        ERR_DESCR_(STKSTRUCT_INFO_CORRUPT_ERR);
-        ERR_DESCR_(STKDATA_INFO_CORRUPT_ERR);
-
-        default:
-            printf("\n\n" RED "CODE_ERROR: UNKNOWN_ERROR" WHT "\n");
-            break;
-    }
-
-    #undef ERR_DESCR_
-}
 
 
 #ifndef NDEBUG

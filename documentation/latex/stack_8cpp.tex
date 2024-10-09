@@ -1,0 +1,181 @@
+\doxysection{source/stack.cpp File Reference}
+\hypertarget{stack_8cpp}{}\label{stack_8cpp}\index{source/stack.cpp@{source/stack.cpp}}
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}stack.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structstack__t}{stack\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Sructure with stack info. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stack_8cpp_a8765fd4de85182497f296d43a357a03d}{STACK\+\_\+\+VERIFY}}(stk)
+\begin{DoxyCompactList}\small\item\em Macro for verifying stack. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{stack_8cpp_af29a509063abec07e732498ac6044a6a}{PRINT\+\_\+\+CELLS\+\_\+\+VALUE\+\_\+}}(idx)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{stack_8cpp_a948a39d366c8d57e2573ab55863e1911}\label{stack_8cpp_a948a39d366c8d57e2573ab55863e1911} 
+typedef uint64\+\_\+t {\bfseries canary\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Type of canaries on the stack sides. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{stack_8cpp_aa24bd9fded07cdbd50d96164235151c6}{Stack\+Dump}} (const \mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk, const char \texorpdfstring{$\ast$}{*}file\+\_\+name, int line\+\_\+number)
+\begin{DoxyCompactList}\small\item\em !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8cpp_ae003ac2f082ded3119f6c2c7b6eb3651}{Stack\+Dtor}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8cpp_a913b5776681c6c1fe579e0aba4c6a767}{Stack\+Init}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr, const char \texorpdfstring{$\ast$}{*}stk\+\_\+name, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+file, int stk\+\_\+init\+\_\+line, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+func)
+\item 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8cpp_ac101f32b1c286f0bd6721fae85f52945}{Stack\+Pop}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}var)
+\item 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8cpp_a36b84d9fff9c3d894301d8d3e459b8f3}{Stack\+Push}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File with constructions for main work with stack 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{stack_8cpp_af29a509063abec07e732498ac6044a6a}\index{stack.cpp@{stack.cpp}!PRINT\_CELLS\_VALUE\_@{PRINT\_CELLS\_VALUE\_}}
+\index{PRINT\_CELLS\_VALUE\_@{PRINT\_CELLS\_VALUE\_}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{PRINT\_CELLS\_VALUE\_}{PRINT\_CELLS\_VALUE\_}}
+{\footnotesize\ttfamily \label{stack_8cpp_af29a509063abec07e732498ac6044a6a} 
+\#define PRINT\+\_\+\+CELLS\+\_\+\+VALUE\+\_\+(\begin{DoxyParamCaption}\item[{}]{idx}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (idx\_first\_of\_same\ ==\ (idx))\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(index\_string,\ \textcolor{stringliteral}{"{}*[\%d]"{}},\ (idx));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(index\_string,\ \textcolor{stringliteral}{"{}*[\%d\ -\/\ \%d]"{}},\ idx\_first\_of\_same,\ (idx));\ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\%-\/12s\ \ =\ \ \%d\(\backslash\)n"{}},\ index\_string,\ stk-\/>data[idx]);\ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ idx\_first\_of\_same\ =\ (idx\ +\ 1);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{stack_8cpp_a8765fd4de85182497f296d43a357a03d}\index{stack.cpp@{stack.cpp}!STACK\_VERIFY@{STACK\_VERIFY}}
+\index{STACK\_VERIFY@{STACK\_VERIFY}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{STACK\_VERIFY}{STACK\_VERIFY}}
+{\footnotesize\ttfamily \label{stack_8cpp_a8765fd4de85182497f296d43a357a03d} 
+\#define STACK\+\_\+\+VERIFY(\begin{DoxyParamCaption}\item[{}]{stk}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{CodeError}}\ temp\_code\_err\ =\ NO\_ERROR;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ if\ ((temp\_code\_err\ =\ StackVerify(stk))\ !=\ NO\_ERROR)\ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (temp\_code\_err\ >=\ STACK\_ANTIOVERFLOW\_ERR)\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ StackDump(stk,\ \_\_FILE\_\_,\ \_\_LINE\_\_);\ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ temp\_code\_err;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Macro for verifying stack. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{stack_8cpp_ae003ac2f082ded3119f6c2c7b6eb3651}\index{stack.cpp@{stack.cpp}!StackDtor@{StackDtor}}
+\index{StackDtor@{StackDtor}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackDtor()}{StackDtor()}}
+{\footnotesize\ttfamily \label{stack_8cpp_ae003ac2f082ded3119f6c2c7b6eb3651} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Dtor (\begin{DoxyParamCaption}\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{stk\+\_\+enc\+\_\+ptr}{}\end{DoxyParamCaption})}
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \Hypertarget{stack_8cpp_aa24bd9fded07cdbd50d96164235151c6}\index{stack.cpp@{stack.cpp}!StackDump@{StackDump}}
+\index{StackDump@{StackDump}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackDump()}{StackDump()}}
+{\footnotesize\ttfamily \label{stack_8cpp_aa24bd9fded07cdbd50d96164235151c6} 
+void Stack\+Dump (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+\_\+name}{, }\item[{int}]{line\+\_\+number}{}\end{DoxyParamCaption})}
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+
+Prints stack info (ONLY DEFINED IN DEBUG MODE) 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & Pointer to structure of stack that should be printed \\
+\hline
+\mbox{\texttt{ in}}  & {\em file\+\_\+name} & Name of file where function was called \\
+\hline
+\mbox{\texttt{ in}}  & {\em line\+\_\+number} & Number of line where function was called\\
+\hline
+\end{DoxyParams}
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \Hypertarget{stack_8cpp_a913b5776681c6c1fe579e0aba4c6a767}\index{stack.cpp@{stack.cpp}!StackInit@{StackInit}}
+\index{StackInit@{StackInit}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackInit()}{StackInit()}}
+{\footnotesize\ttfamily \label{stack_8cpp_a913b5776681c6c1fe579e0aba4c6a767} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Init (\begin{DoxyParamCaption}\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{stk\+\_\+name}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{stk\+\_\+init\+\_\+file}{, }\item[{int}]{stk\+\_\+init\+\_\+line}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{stk\+\_\+init\+\_\+func}{}\end{DoxyParamCaption})}
+
+\DoxyHorRuler{0}
+ Initializes stack 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+name} & Name of stack pointer variable \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+init\+\_\+file} & Name of file where stack is initialized \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+init\+\_\+line} & Number of line where stack is initialized \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+init\+\_\+func} & Name of function where stack is initialized \\
+\hline
+\end{DoxyParams}
+\hypertarget{stack_8cpp_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md1}{autotoc\+\_\+md1}}\label{stack_8cpp_autotoc_md1}
+\begin{DoxyReturn}{Returns}
+Type of code error or 0 for "{}no error"{}-\/state 
+\end{DoxyReturn}
+\Hypertarget{stack_8cpp_ac101f32b1c286f0bd6721fae85f52945}\index{stack.cpp@{stack.cpp}!StackPop@{StackPop}}
+\index{StackPop@{StackPop}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
+{\footnotesize\ttfamily \label{stack_8cpp_ac101f32b1c286f0bd6721fae85f52945} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
+
+\DoxyHorRuler{0}
+ Extractes value from stack 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
+\hline
+\mbox{\texttt{ out}}  & {\em var} & Pointer to variable where extracted value should be put \\
+\hline
+\end{DoxyParams}
+\hypertarget{stack_8cpp_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md2}{autotoc\+\_\+md2}}\label{stack_8cpp_autotoc_md2}
+\begin{DoxyReturn}{Returns}
+Type of code error or 0 for "{}no error"{}-\/state 
+\end{DoxyReturn}
+\Hypertarget{stack_8cpp_a36b84d9fff9c3d894301d8d3e459b8f3}\index{stack.cpp@{stack.cpp}!StackPush@{StackPush}}
+\index{StackPush@{StackPush}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
+{\footnotesize\ttfamily \label{stack_8cpp_a36b84d9fff9c3d894301d8d3e459b8f3} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+
+\DoxyHorRuler{0}
+ Extractes value from stack 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
+\hline
+\mbox{\texttt{ in}}  & {\em value} & Value that should be put to stack \\
+\hline
+\end{DoxyParams}
+\hypertarget{stack_8cpp_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md3}{autotoc\+\_\+md3}}\label{stack_8cpp_autotoc_md3}
+\begin{DoxyReturn}{Returns}
+Type of code error or 0 for "{}no error"{}-\/state 
+\end{DoxyReturn}

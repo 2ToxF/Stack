@@ -1,224 +1,191 @@
 \doxysection{include/stack.h File Reference}
 \hypertarget{stack_8h}{}\label{stack_8h}\index{include/stack.h@{include/stack.h}}
-{\ttfamily \#include $<$stdint.\+h$>$}\newline
 {\ttfamily \#include "{}debug\+\_\+mode.\+h"{}}\newline
-\doxysubsubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{structstack__t}{stack\+\_\+t}}
-\begin{DoxyCompactList}\small\item\em Sructure with stack info. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}\label{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3} 
-\#define {\bfseries ON\+\_\+\+DEBUG}(...)
+\Hypertarget{stack_8h_a6283768c836fd4a0f382514973bc3ff4}\label{stack_8h_a6283768c836fd4a0f382514973bc3ff4} 
+\#define {\bfseries BLK}~"{}\textbackslash{}033\mbox{[}0;30m"{}
+\item 
+\Hypertarget{stack_8h_a8d23feea868a983c8c2b661e1e16972f}\label{stack_8h_a8d23feea868a983c8c2b661e1e16972f} 
+\#define {\bfseries RED}~"{}\textbackslash{}033\mbox{[}0;31m"{}
+\item 
+\Hypertarget{stack_8h_aea69ffbacdcdf16c21b8c9961df84448}\label{stack_8h_aea69ffbacdcdf16c21b8c9961df84448} 
+\#define {\bfseries GRN}~"{}\textbackslash{}033\mbox{[}0;32m"{}
+\item 
+\Hypertarget{stack_8h_a96fac03c4ab3363f06a0328e0e53a40c}\label{stack_8h_a96fac03c4ab3363f06a0328e0e53a40c} 
+\#define {\bfseries YEL}~"{}\textbackslash{}033\mbox{[}0;33m"{}
+\item 
+\Hypertarget{stack_8h_add9307de87f38e77d336751e305886f6}\label{stack_8h_add9307de87f38e77d336751e305886f6} 
+\#define {\bfseries BLU}~"{}\textbackslash{}033\mbox{[}0;34m"{}
+\item 
+\Hypertarget{stack_8h_af54a5a977c0c499323d656315f008ee0}\label{stack_8h_af54a5a977c0c499323d656315f008ee0} 
+\#define {\bfseries MAG}~"{}\textbackslash{}033\mbox{[}0;35m"{}
+\item 
+\Hypertarget{stack_8h_adc708fa688f5d78db361f66c36f0f807}\label{stack_8h_adc708fa688f5d78db361f66c36f0f807} 
+\#define {\bfseries CYN}~"{}\textbackslash{}033\mbox{[}0;36m"{}
+\item 
+\Hypertarget{stack_8h_aeaf3a04d5bf63b204689a714718ea930}\label{stack_8h_aeaf3a04d5bf63b204689a714718ea930} 
+\#define {\bfseries WHT}~"{}\textbackslash{}033\mbox{[}0;37m"{}
+\item 
+\#define \mbox{\hyperlink{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}{ON\+\_\+\+DEBUG}}(...)
 \begin{DoxyCompactList}\small\item\em Is replaced with it\textquotesingle{}s arguements only in debug mode. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{stack_8h_a19f97444e061d6366662a29a783cc089}{CREATE\+\_\+\+STACK}}(stk)
+\#define \mbox{\hyperlink{stack_8h_adb2828f07099e672463abe8410adaf5b}{CREATE\+\_\+\+STACK}}(stk\+\_\+enc\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Creates stack structure depending on debug mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{stack_8h_ad060f460c093578e6a06c3c6fd730857}\label{stack_8h_ad060f460c093578e6a06c3c6fd730857} 
 typedef int {\bfseries Stack\+Elem\+\_\+t}
-\begin{DoxyCompactList}\small\item\em Type of stack elements. \end{DoxyCompactList}\item 
-\Hypertarget{stack_8h_a948a39d366c8d57e2573ab55863e1911}\label{stack_8h_a948a39d366c8d57e2573ab55863e1911} 
-typedef uint64\+\_\+t {\bfseries canary\+\_\+t}
-\begin{DoxyCompactList}\small\item\em Type of canaries on the stack sides. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Type of stack elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}\label{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad} 
 enum \mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \{ \newline
 {\bfseries NO\+\_\+\+ERROR}
+, {\bfseries CANT\+\_\+\+CREATE\+\_\+\+RAND\+\_\+\+NUM\+\_\+\+ERR}
 , {\bfseries STACK\+\_\+\+ALREADY\+\_\+\+INITED\+\_\+\+ERR}
 , {\bfseries NULL\+\_\+\+STK\+\_\+\+STRUCT\+\_\+\+PTR\+\_\+\+ERR}
-, {\bfseries NULL\+\_\+\+STK\+\_\+\+DATA\+\_\+\+PTR\+\_\+\+ERR}
 , \newline
-{\bfseries NEG\+\_\+\+STK\+\_\+\+CAPACITY\+\_\+\+ERR}
+{\bfseries NULL\+\_\+\+STK\+\_\+\+DATA\+\_\+\+PTR\+\_\+\+ERR}
+, {\bfseries NEG\+\_\+\+STK\+\_\+\+CAPACITY\+\_\+\+ERR}
 , {\bfseries STACK\+\_\+\+ANTIOVERFLOW\+\_\+\+ERR}
 , {\bfseries STACK\+\_\+\+OVERFLOW\+\_\+\+ERR}
-, {\bfseries OUT\+\_\+\+OF\+\_\+\+MEMORY\+\_\+\+ERR}
 , \newline
-{\bfseries STACK\+\_\+\+USES\+\_\+\+MUCH\+\_\+\+MEM\+\_\+\+ERR}
+{\bfseries OUT\+\_\+\+OF\+\_\+\+MEMORY\+\_\+\+ERR}
+, {\bfseries STACK\+\_\+\+USES\+\_\+\+MUCH\+\_\+\+MEM\+\_\+\+ERR}
 , {\bfseries STKSTRUCT\+\_\+\+CANARY\+\_\+\+CORRUPT\+\_\+\+ERR}
 , {\bfseries STKDATA\+\_\+\+CANARY\+\_\+\+CORRUPT\+\_\+\+ERR}
-, {\bfseries STKSTRUCT\+\_\+\+INFO\+\_\+\+CORRUPT\+\_\+\+ERR}
 , \newline
-{\bfseries STKDATA\+\_\+\+INFO\+\_\+\+CORRUPT\+\_\+\+ERR}
+{\bfseries STKSTRUCT\+\_\+\+INFO\+\_\+\+CORRUPT\+\_\+\+ERR}
+, {\bfseries STKDATA\+\_\+\+INFO\+\_\+\+CORRUPT\+\_\+\+ERR}
  \}
 \begin{DoxyCompactList}\small\item\em Enumerated types of code errors or 0 for "{}no error"{}-\/state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{stack_8h_ad67c4445b09d694a85da6ea407aaae52}{Stack\+Dtor}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk)
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_ae003ac2f082ded3119f6c2c7b6eb3651}{Stack\+Dtor}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_a913b5776681c6c1fe579e0aba4c6a767}{Stack\+Init}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr, const char \texorpdfstring{$\ast$}{*}stk\+\_\+name, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+file, int stk\+\_\+init\+\_\+line, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+func)
 \item 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_aea38482d61370bd16f3abefb58ec2448}{Stack\+Hash}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk)
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_ac101f32b1c286f0bd6721fae85f52945}{Stack\+Pop}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}var)
 \item 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_aa137db29b47216a444abd6b2762aaee9}{Stack\+Hash\+Data}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk)
-\item 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_ab211be79a1e6df2d3df33500f96f9167}{Stack\+Hash\+Struct}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk)
-\item 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_a1600a4c9f1d32c7b9a8e13b58732260d}{Stack\+Init}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk)
-\item 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_a90a5cc295836028d05c1094858196ba4}{Stack\+Pop}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}var)
-\item 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_a924a150a69d0b3cf306189c063d9a361}{Stack\+Push}} (\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}stk, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} value)
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \mbox{\hyperlink{stack_8h_a36b84d9fff9c3d894301d8d3e459b8f3}{Stack\+Push}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} value)
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-\Hypertarget{stack_8h_aa554aef23f9707fdb1e7691530259481}\label{stack_8h_aa554aef23f9707fdb1e7691530259481} 
-const size\+\_\+t {\bfseries DEFAULT\+\_\+\+STK\+\_\+\+CAPACITY} = 8
-\begin{DoxyCompactList}\small\item\em Default number of elements that can be put to stack. \end{DoxyCompactList}\item 
-\Hypertarget{stack_8h_a09b4dfab0c89912c73bdd68923d1f2f8}\label{stack_8h_a09b4dfab0c89912c73bdd68923d1f2f8} 
-const int {\bfseries RESIZE\+\_\+\+COEF} = 2
-\begin{DoxyCompactList}\small\item\em Coefficeint for upsizing stack. \end{DoxyCompactList}\item 
-\Hypertarget{stack_8h_acd39ec2282cd555d99c21c3f5845d92a}\label{stack_8h_acd39ec2282cd555d99c21c3f5845d92a} 
-const int {\bfseries RESIZE\+\_\+\+COEF\+\_\+\+DOWN} = \mbox{\hyperlink{stack_8h_a09b4dfab0c89912c73bdd68923d1f2f8}{RESIZE\+\_\+\+COEF}} \texorpdfstring{$\ast$}{*} 2
-\begin{DoxyCompactList}\small\item\em Coefficient that sets ratio of minimum and maximum number of elements (except default capacity) \end{DoxyCompactList}\item 
-\Hypertarget{stack_8h_af7ebb6331d94a2f6c321384e8743056a}\label{stack_8h_af7ebb6331d94a2f6c321384e8743056a} 
-const \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\+\_\+t}} {\bfseries STACK\+\_\+\+CANARY\+\_\+\+VALUE} = 0x\+BAD57\+ACCBAD57\+ACC
-\begin{DoxyCompactList}\small\item\em Canary value for securing stack structure. \end{DoxyCompactList}\item 
-\Hypertarget{stack_8h_a8a401c5b1b3e9d5599f766e1c060e02b}\label{stack_8h_a8a401c5b1b3e9d5599f766e1c060e02b} 
-const \mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\+\_\+t}} {\bfseries DATA\+\_\+\+CANARY\+\_\+\+VALUE} = 0x\+BADDA7\+A0\+BADDA7\+A0
-\begin{DoxyCompactList}\small\item\em Canary value for securing stack elements. \end{DoxyCompactList}\item 
-\Hypertarget{stack_8h_a2c8db6997ee5d91851d1c3b16fed9351}\label{stack_8h_a2c8db6997ee5d91851d1c3b16fed9351} 
-const size\+\_\+t {\bfseries SIZE\+\_\+\+OF\+\_\+\+CANARY} = sizeof(\mbox{\hyperlink{stack_8h_a948a39d366c8d57e2573ab55863e1911}{canary\+\_\+t}})
-\begin{DoxyCompactList}\small\item\em Size of all canaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 File with constructions for main work with stack 
 
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{stack_8h_a19f97444e061d6366662a29a783cc089}\index{stack.h@{stack.h}!CREATE\_STACK@{CREATE\_STACK}}
+\Hypertarget{stack_8h_adb2828f07099e672463abe8410adaf5b}\index{stack.h@{stack.h}!CREATE\_STACK@{CREATE\_STACK}}
 \index{CREATE\_STACK@{CREATE\_STACK}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{CREATE\_STACK}{CREATE\_STACK}}
-{\footnotesize\ttfamily \label{stack_8h_a19f97444e061d6366662a29a783cc089} 
-\#define CREATE\+\_\+\+STACK(\begin{DoxyParamCaption}\item[{}]{stk}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{stack_8h_adb2828f07099e672463abe8410adaf5b} 
+\#define CREATE\+\_\+\+STACK(\begin{DoxyParamCaption}\item[{}]{stk\+\_\+enc\+\_\+ptr}{}\end{DoxyParamCaption})}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\{\}}
+\DoxyCodeLine{\mbox{\hyperlink{stack_8h_a913b5776681c6c1fe579e0aba4c6a767}{StackInit}}(stk\_enc\_ptr,\ \#stk\_enc\_ptr,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_PRETTY\_FUNCTION\_\_)}
 
 \end{DoxyCode}
 
 
 Creates stack structure depending on debug mode. 
 
+\Hypertarget{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3}\index{stack.h@{stack.h}!ON\_DEBUG@{ON\_DEBUG}}
+\index{ON\_DEBUG@{ON\_DEBUG}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{ON\_DEBUG}{ON\_DEBUG}}
+{\footnotesize\ttfamily \label{stack_8h_a1bdd7c1369b250215a080e8421d4ecf3} 
+\#define ON\+\_\+\+DEBUG(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_VA\_ARGS\_\_}
+
+\end{DoxyCode}
+
+
+Is replaced with it\textquotesingle{}s arguements only in debug mode. 
+
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{stack_8h_ad67c4445b09d694a85da6ea407aaae52}\index{stack.h@{stack.h}!StackDtor@{StackDtor}}
+\Hypertarget{stack_8h_ae003ac2f082ded3119f6c2c7b6eb3651}\index{stack.h@{stack.h}!StackDtor@{StackDtor}}
 \index{StackDtor@{StackDtor}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{StackDtor()}{StackDtor()}}
-{\footnotesize\ttfamily \label{stack_8h_ad67c4445b09d694a85da6ea407aaae52} 
-void Stack\+Dtor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{stack_8h_ae003ac2f082ded3119f6c2c7b6eb3651} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Dtor (\begin{DoxyParamCaption}\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{stk\+\_\+enc\+\_\+ptr}{}\end{DoxyParamCaption})}
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 
 \DoxyHorRuler{0}
- Destruct stack \hypertarget{stack_8cpp_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md0}{autotoc\+\_\+md0}}\label{stack_8cpp_autotoc_md0}
+ Destruct stack \hypertarget{stack_8h_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md0}{autotoc\+\_\+md0}}\label{stack_8h_autotoc_md0}
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in,out}}  & {\em stk} & Pointer to stack sructure \\
+\mbox{\texttt{ in,out}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure\\
 \hline
 \end{DoxyParams}
-\Hypertarget{stack_8h_aea38482d61370bd16f3abefb58ec2448}\index{stack.h@{stack.h}!StackHash@{StackHash}}
-\index{StackHash@{StackHash}!stack.h@{stack.h}}
-\doxysubsubsection{\texorpdfstring{StackHash()}{StackHash()}}
-{\footnotesize\ttfamily \label{stack_8h_aea38482d61370bd16f3abefb58ec2448} 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{}\end{DoxyParamCaption})}
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \Hypertarget{stack_8h_a913b5776681c6c1fe579e0aba4c6a767}\index{stack.h@{stack.h}!StackInit@{StackInit}}
+\index{StackInit@{StackInit}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackInit()}{StackInit()}}
+{\footnotesize\ttfamily \label{stack_8h_a913b5776681c6c1fe579e0aba4c6a767} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Init (\begin{DoxyParamCaption}\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{stk\+\_\+name}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{stk\+\_\+init\+\_\+file}{, }\item[{int}]{stk\+\_\+init\+\_\+line}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{stk\+\_\+init\+\_\+func}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
- Calculates both structure and data (elements) hashes of stack 
+ Initializes stack 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in,out}}  & {\em stk} & Pointer to stack sructure \\
+\mbox{\texttt{ in,out}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+name} & Name of stack pointer variable \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+init\+\_\+file} & Name of file where stack is initialized \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+init\+\_\+line} & Number of line where stack is initialized \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+init\+\_\+func} & Name of function where stack is initialized \\
 \hline
 \end{DoxyParams}
 \hypertarget{stack_8cpp_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md1}{autotoc\+\_\+md1}}\label{stack_8cpp_autotoc_md1}
 \begin{DoxyReturn}{Returns}
 Type of code error or 0 for "{}no error"{}-\/state 
 \end{DoxyReturn}
-\Hypertarget{stack_8h_aa137db29b47216a444abd6b2762aaee9}\index{stack.h@{stack.h}!StackHashData@{StackHashData}}
-\index{StackHashData@{StackHashData}!stack.h@{stack.h}}
-\doxysubsubsection{\texorpdfstring{StackHashData()}{StackHashData()}}
-{\footnotesize\ttfamily \label{stack_8h_aa137db29b47216a444abd6b2762aaee9} 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Hash\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{}\end{DoxyParamCaption})}
+\Hypertarget{stack_8h_ac101f32b1c286f0bd6721fae85f52945}\index{stack.h@{stack.h}!StackPop@{StackPop}}
+\index{StackPop@{StackPop}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
+{\footnotesize\ttfamily \label{stack_8h_ac101f32b1c286f0bd6721fae85f52945} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
- Calculates stack data (elements) hash 
+ Extractes value from stack 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in,out}}  & {\em stk} & Pointer to stack sructure \\
+\mbox{\texttt{ in}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
+\hline
+\mbox{\texttt{ out}}  & {\em var} & Pointer to variable where extracted value should be put \\
 \hline
 \end{DoxyParams}
 \hypertarget{stack_8cpp_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md2}{autotoc\+\_\+md2}}\label{stack_8cpp_autotoc_md2}
 \begin{DoxyReturn}{Returns}
 Type of code error or 0 for "{}no error"{}-\/state 
 \end{DoxyReturn}
-\Hypertarget{stack_8h_ab211be79a1e6df2d3df33500f96f9167}\index{stack.h@{stack.h}!StackHashStruct@{StackHashStruct}}
-\index{StackHashStruct@{StackHashStruct}!stack.h@{stack.h}}
-\doxysubsubsection{\texorpdfstring{StackHashStruct()}{StackHashStruct()}}
-{\footnotesize\ttfamily \label{stack_8h_ab211be79a1e6df2d3df33500f96f9167} 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Hash\+Struct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{}\end{DoxyParamCaption})}
-
-\DoxyHorRuler{0}
- Calculates stack structure hash 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in,out}}  & {\em stk} & Pointer to stack sructure \\
-\hline
-\end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md3}{autotoc\+\_\+md3}}\label{stack_8cpp_autotoc_md3}
-\begin{DoxyReturn}{Returns}
-Type of code error or 0 for "{}no error"{}-\/state 
-\end{DoxyReturn}
-\Hypertarget{stack_8h_a1600a4c9f1d32c7b9a8e13b58732260d}\index{stack.h@{stack.h}!StackInit@{StackInit}}
-\index{StackInit@{StackInit}!stack.h@{stack.h}}
-\doxysubsubsection{\texorpdfstring{StackInit()}{StackInit()}}
-{\footnotesize\ttfamily \label{stack_8h_a1600a4c9f1d32c7b9a8e13b58732260d} 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{}\end{DoxyParamCaption})}
-
-\DoxyHorRuler{0}
- Initializes stack 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in,out}}  & {\em stk} & Pointer to stack sructure \\
-\hline
-\end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md4}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md4}{autotoc\+\_\+md4}}\label{stack_8cpp_autotoc_md4}
-\begin{DoxyReturn}{Returns}
-Type of code error or 0 for "{}no error"{}-\/state 
-\end{DoxyReturn}
-\Hypertarget{stack_8h_a90a5cc295836028d05c1094858196ba4}\index{stack.h@{stack.h}!StackPop@{StackPop}}
-\index{StackPop@{StackPop}!stack.h@{stack.h}}
-\doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
-{\footnotesize\ttfamily \label{stack_8h_a90a5cc295836028d05c1094858196ba4} 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
-
-\DoxyHorRuler{0}
- Extractes value from stack 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em stk} & Pointer to stack sructure \\
-\hline
-\mbox{\texttt{ out}}  & {\em var} & Pointer to variable where extracted value should be put \\
-\hline
-\end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md5}{autotoc\+\_\+md5}}\label{stack_8cpp_autotoc_md5}
-\begin{DoxyReturn}{Returns}
-Type of code error or 0 for "{}no error"{}-\/state 
-\end{DoxyReturn}
-\Hypertarget{stack_8h_a924a150a69d0b3cf306189c063d9a361}\index{stack.h@{stack.h}!StackPush@{StackPush}}
+\Hypertarget{stack_8h_a36b84d9fff9c3d894301d8d3e459b8f3}\index{stack.h@{stack.h}!StackPush@{StackPush}}
 \index{StackPush@{StackPush}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
-{\footnotesize\ttfamily \label{stack_8h_a924a150a69d0b3cf306189c063d9a361} 
-\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstack__t}{stack\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{stk}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{stack_8h_a36b84d9fff9c3d894301d8d3e459b8f3} 
+\mbox{\hyperlink{stack_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
  Extractes value from stack 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em stk} & Pointer to stack sructure \\
+\mbox{\texttt{ in}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
 \hline
 \mbox{\texttt{ in}}  & {\em value} & Value that should be put to stack \\
 \hline
 \end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md6}{autotoc\+\_\+md6}}\label{stack_8cpp_autotoc_md6}
+\hypertarget{stack_8cpp_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md3}{autotoc\+\_\+md3}}\label{stack_8cpp_autotoc_md3}
 \begin{DoxyReturn}{Returns}
 Type of code error or 0 for "{}no error"{}-\/state 
 \end{DoxyReturn}
