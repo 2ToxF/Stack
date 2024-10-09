@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stack_5fverify_0',['STACK_VERIFY',['../stack_8cpp.html#a8765fd4de85182497f296d43a357a03d',1,'stack.cpp']]]
+  ['ndebug_0',['NDEBUG',['../settings_8h.html#a8de3ed741dadc9c979a4ff17c0a9116e',1,'settings.h']]]
 ];

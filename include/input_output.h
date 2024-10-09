@@ -6,7 +6,7 @@
 #ifndef INPUT_OUTPUT_H
 #define INPUT_OUTPUT_H
 
-#include "debug_mode.h"
+#include "settings.h"
 #include "stack.h"
 
 /*!

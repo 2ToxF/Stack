@@ -1,9 +1,12 @@
 \doxysection{include/utils.h File Reference}
 \hypertarget{utils_8h}{}\label{utils_8h}\index{include/utils.h@{include/utils.h}}
+{\ttfamily \#include "{}settings.\+h"{}}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 uint64\+\_\+t \mbox{\hyperlink{utils_8h_aa4870d1ec414f99151e9f7ea3615d2c7}{My\+Get\+Random64}} ()
+\item 
+unsigned long \mbox{\hyperlink{utils_8h_a76e5019a6d83cfa466777f5e140d62c8}{My\+Hash}} (void \texorpdfstring{$\ast$}{*}ptr, int number\+\_\+of\+\_\+bytes)
 \end{DoxyCompactItemize}
 
 
@@ -19,4 +22,20 @@ uint64\+\_\+t My\+Get\+Random64 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCapti
 
 Get random number \begin{DoxyReturn}{Returns}
 Random number as an unsigned long 
+\end{DoxyReturn}
+\Hypertarget{utils_8h_a76e5019a6d83cfa466777f5e140d62c8}\index{utils.h@{utils.h}!MyHash@{MyHash}}
+\index{MyHash@{MyHash}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{MyHash()}{MyHash()}}
+{\footnotesize\ttfamily \label{utils_8h_a76e5019a6d83cfa466777f5e140d62c8} 
+unsigned long My\+Hash (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{int}]{number\+\_\+of\+\_\+bytes}{}\end{DoxyParamCaption})}
+
+Hashes info using DJB2 algorithm 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ptr} & Pointer to the first byte \\
+\hline
+\mbox{\texttt{ in}}  & {\em number\+\_\+of\+\_\+bytes} & Number of bytes that should be hashed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hash $<$number\+\_\+of\+\_\+butes$>$ elements with the first one on $<$ptr$>$ 
 \end{DoxyReturn}

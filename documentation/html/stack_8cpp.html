@@ -93,7 +93,8 @@ $(function(){ initResizable(false); });
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">stack.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -114,9 +115,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a8765fd4de85182497f296d43a357a03d" id="r_a8765fd4de85182497f296d43a357a03d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8765fd4de85182497f296d43a357a03d">STACK_VERIFY</a>(stk)</td></tr>
-<tr class="memdesc:a8765fd4de85182497f296d43a357a03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for verifying stack.  <br /></td></tr>
-<tr class="separator:a8765fd4de85182497f296d43a357a03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88687dee7f213469606af74ad723b1d5" id="r_a88687dee7f213469606af74ad723b1d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88687dee7f213469606af74ad723b1d5">STACK_VERIFY</a>(stk)</td></tr>
+<tr class="memdesc:a88687dee7f213469606af74ad723b1d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for verifying stack.  <br /></td></tr>
+<tr class="separator:a88687dee7f213469606af74ad723b1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af29a509063abec07e732498ac6044a6a" id="r_af29a509063abec07e732498ac6044a6a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af29a509063abec07e732498ac6044a6a">PRINT_CELLS_VALUE_</a>(idx)</td></tr>
 <tr class="separator:af29a509063abec07e732498ac6044a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -135,12 +136,60 @@ Functions</h2></td></tr>
 <tr class="memitem:ae003ac2f082ded3119f6c2c7b6eb3651" id="r_ae003ac2f082ded3119f6c2c7b6eb3651"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae003ac2f082ded3119f6c2c7b6eb3651">StackDtor</a> (size_t *stk_enc_ptr)</td></tr>
 <tr class="memdesc:ae003ac2f082ded3119f6c2c7b6eb3651"><td class="mdescLeft">&#160;</td><td class="mdescRight">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  <br /></td></tr>
 <tr class="separator:ae003ac2f082ded3119f6c2c7b6eb3651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a913b5776681c6c1fe579e0aba4c6a767" id="r_a913b5776681c6c1fe579e0aba4c6a767"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a> (size_t *stk_enc_ptr, const char *stk_name, const char *stk_init_file, int stk_init_line, const char *stk_init_func)</td></tr>
-<tr class="separator:a913b5776681c6c1fe579e0aba4c6a767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78cc43dac425ea78d77f364e9c9ff77c" id="r_a78cc43dac425ea78d77f364e9c9ff77c"><td class="memItemLeft" align="right" valign="top"><a id="a78cc43dac425ea78d77f364e9c9ff77c" name="a78cc43dac425ea78d77f364e9c9ff77c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (stk-&gt;data !=NULL||stk-&gt;index !=0||stk-&gt;capacity !=0)</td></tr>
+<tr class="separator:a78cc43dac425ea78d77f364e9c9ff77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1fc5c7b1f3dc9b22390a5b0cb4ca300" id="r_aa1fc5c7b1f3dc9b22390a5b0cb4ca300"><td class="memItemLeft" align="right" valign="top"><a id="aa1fc5c7b1f3dc9b22390a5b0cb4ca300" name="aa1fc5c7b1f3dc9b22390a5b0cb4ca300"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (key_for_ptr_dec==0)</td></tr>
+<tr class="separator:aa1fc5c7b1f3dc9b22390a5b0cb4ca300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf628f563ac5c3eb0ff2200e0d1156b" id="r_aadf628f563ac5c3eb0ff2200e0d1156b"><td class="memItemLeft" align="right" valign="top"><a id="aadf628f563ac5c3eb0ff2200e0d1156b" name="aadf628f563ac5c3eb0ff2200e0d1156b"></a>
+*<a class="el" href="#a948a39d366c8d57e2573ab55863e1911">canary_t</a> *new_data DEFAULT_STK_CAPACITY *&#160;</td><td class="memItemRight" valign="bottom"><b>sizeof</b> (<a class="el" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>)+SIZE_OF_CANARY))</td></tr>
+<tr class="separator:aadf628f563ac5c3eb0ff2200e0d1156b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaa21ec6fa207bb79c82bec23aecd17c" id="r_aaaa21ec6fa207bb79c82bec23aecd17c"><td class="memItemLeft" align="right" valign="top"><a id="aaaa21ec6fa207bb79c82bec23aecd17c" name="aaaa21ec6fa207bb79c82bec23aecd17c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StackHash</b> (stk)</td></tr>
+<tr class="separator:aaaa21ec6fa207bb79c82bec23aecd17c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac101f32b1c286f0bd6721fae85f52945" id="r_ac101f32b1c286f0bd6721fae85f52945"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac101f32b1c286f0bd6721fae85f52945">StackPop</a> (size_t stk_enc_ptr, <a class="el" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> *var)</td></tr>
 <tr class="separator:ac101f32b1c286f0bd6721fae85f52945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36b84d9fff9c3d894301d8d3e459b8f3" id="r_a36b84d9fff9c3d894301d8d3e459b8f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36b84d9fff9c3d894301d8d3e459b8f3">StackPush</a> (size_t stk_enc_ptr, <a class="el" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value)</td></tr>
 <tr class="separator:a36b84d9fff9c3d894301d8d3e459b8f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a02df600d9f9d5364d186505f04a6f69b" id="r_a02df600d9f9d5364d186505f04a6f69b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02df600d9f9d5364d186505f04a6f69b">DIF_STACK_INIT</a></td></tr>
+<tr class="separator:a02df600d9f9d5364d186505f04a6f69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac01c3b2dbed62721bb7a7fcc93af2e" id="r_a1ac01c3b2dbed62721bb7a7fcc93af2e"><td class="memItemLeft" align="right" valign="top"><a id="a1ac01c3b2dbed62721bb7a7fcc93af2e" name="a1ac01c3b2dbed62721bb7a7fcc93af2e"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>stk_name</b> = stk_name</td></tr>
+<tr class="separator:a1ac01c3b2dbed62721bb7a7fcc93af2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa1a080d12d4c07fe4e4e58493f27a6" id="r_acaa1a080d12d4c07fe4e4e58493f27a6"><td class="memItemLeft" align="right" valign="top"><a id="acaa1a080d12d4c07fe4e4e58493f27a6" name="acaa1a080d12d4c07fe4e4e58493f27a6"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>init_file</b> = stk_init_file</td></tr>
+<tr class="separator:acaa1a080d12d4c07fe4e4e58493f27a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae08a268f9b5df1c4b83454a107234afa" id="r_ae08a268f9b5df1c4b83454a107234afa"><td class="memItemLeft" align="right" valign="top"><a id="ae08a268f9b5df1c4b83454a107234afa" name="ae08a268f9b5df1c4b83454a107234afa"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>init_line</b> = stk_init_line</td></tr>
+<tr class="separator:ae08a268f9b5df1c4b83454a107234afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbea12998bae9527c781457cf9759d4a" id="r_abbea12998bae9527c781457cf9759d4a"><td class="memItemLeft" align="right" valign="top"><a id="abbea12998bae9527c781457cf9759d4a" name="abbea12998bae9527c781457cf9759d4a"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>init_func</b> = stk_init_func</td></tr>
+<tr class="separator:abbea12998bae9527c781457cf9759d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4d8a44cf757e909aacf86ac53047fb" id="r_a1e4d8a44cf757e909aacf86ac53047fb"><td class="memItemLeft" align="right" valign="top"><a id="a1e4d8a44cf757e909aacf86ac53047fb" name="a1e4d8a44cf757e909aacf86ac53047fb"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>left_canary</b> = stk-&gt;right_canary = STACK_CANARY_VALUE</td></tr>
+<tr class="separator:a1e4d8a44cf757e909aacf86ac53047fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7884e781dc2bb81d173629793ebd513" id="r_ae7884e781dc2bb81d173629793ebd513"><td class="memItemLeft" align="right" valign="top"><a id="ae7884e781dc2bb81d173629793ebd513" name="ae7884e781dc2bb81d173629793ebd513"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>new_data</b> = (char*) calloc(DEFAULT_STK_CAPACITY*sizeof(<a class="el" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>) + SIZE_OF_CANARY*2, sizeof(char))</td></tr>
+<tr class="separator:ae7884e781dc2bb81d173629793ebd513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4dd71a93495857f8daa2a84b59b69d9" id="r_ab4dd71a93495857f8daa2a84b59b69d9"><td class="memItemLeft" align="right" valign="top"><a id="ab4dd71a93495857f8daa2a84b59b69d9" name="ab4dd71a93495857f8daa2a84b59b69d9"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> = (<a class="el" href="stack_8h.html#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a>*) (new_data + SIZE_OF_CANARY)</td></tr>
+<tr class="separator:ab4dd71a93495857f8daa2a84b59b69d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4fb00c586678a989c28ec4a18245204" id="r_ac4fb00c586678a989c28ec4a18245204"><td class="memItemLeft" align="right" valign="top"><a id="ac4fb00c586678a989c28ec4a18245204" name="ac4fb00c586678a989c28ec4a18245204"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>index</b> = 0</td></tr>
+<tr class="separator:ac4fb00c586678a989c28ec4a18245204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b4e17981973d7058b1957ca37f4cb7" id="r_a63b4e17981973d7058b1957ca37f4cb7"><td class="memItemLeft" align="right" valign="top"><a id="a63b4e17981973d7058b1957ca37f4cb7" name="a63b4e17981973d7058b1957ca37f4cb7"></a>
+stk&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b> = DEFAULT_STK_CAPACITY</td></tr>
+<tr class="separator:a63b4e17981973d7058b1957ca37f4cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8022e329fbd6b4e5168d18f03f15a50f" id="r_a8022e329fbd6b4e5168d18f03f15a50f"><td class="memItemLeft" align="right" valign="top"><a id="a8022e329fbd6b4e5168d18f03f15a50f" name="a8022e329fbd6b4e5168d18f03f15a50f"></a>
+*&#160;</td><td class="memItemRight" valign="bottom"><b>stk_enc_ptr</b> = StackPtrXOR((size_t) stk)</td></tr>
+<tr class="separator:a8022e329fbd6b4e5168d18f03f15a50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2638ebcf7325acbb5fbd73c44776dbef" id="r_a2638ebcf7325acbb5fbd73c44776dbef"><td class="memItemLeft" align="right" valign="top"><a id="a2638ebcf7325acbb5fbd73c44776dbef" name="a2638ebcf7325acbb5fbd73c44776dbef"></a>
+return&#160;</td><td class="memItemRight" valign="bottom"><b>NO_ERROR</b></td></tr>
+<tr class="separator:a2638ebcf7325acbb5fbd73c44776dbef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File with constructions for main work with stack </p>
@@ -170,14 +219,14 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a8765fd4de85182497f296d43a357a03d" name="a8765fd4de85182497f296d43a357a03d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8765fd4de85182497f296d43a357a03d">&#9670;&#160;</a></span>STACK_VERIFY</h2>
+<a id="a88687dee7f213469606af74ad723b1d5" name="a88687dee7f213469606af74ad723b1d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88687dee7f213469606af74ad723b1d5">&#9670;&#160;</a></span>STACK_VERIFY</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STACK_VERIFY</td>
+          <td class="memname">STACK_VERIFY</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>stk</em></span></td><td>)</td>
           <td></td>
@@ -194,7 +243,7 @@ Functions</h2></td></tr>
 <div class="line">                <span class="keywordflow">return</span> temp_code_err;                            \</div>
 <div class="line">            }                                                    \</div>
 <div class="line">        } <span class="keywordflow">while</span>(0)</div>
-<div class="ttc" id="astack_8h_html_a4890027e84c3d8fa2a1701b5689a10ad"><div class="ttname"><a href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a></div><div class="ttdeci">CodeError</div><div class="ttdoc">Enumerated types of code errors or 0 for &quot;no error&quot;-state.</div><div class="ttdef"><b>Definition</b> stack.h:37</div></div>
+<div class="ttc" id="astack_8h_html_a4890027e84c3d8fa2a1701b5689a10ad"><div class="ttname"><a href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a></div><div class="ttdeci">CodeError</div><div class="ttdoc">Enumerated types of code errors or 0 for &quot;no error&quot;-state.</div><div class="ttdef"><b>Definition</b> stack.h:43</div></div>
 </div><!-- fragment -->
 <p>Macro for verifying stack. </p>
 
@@ -255,56 +304,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </p>
-
-</div>
-</div>
-<a id="a913b5776681c6c1fe579e0aba4c6a767" name="a913b5776681c6c1fe579e0aba4c6a767"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a913b5776681c6c1fe579e0aba4c6a767">&#9670;&#160;</a></span>StackInit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="stack_8h.html#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> StackInit </td>
-          <td>(</td>
-          <td class="paramtype">size_t *</td>          <td class="paramname"><span class="paramname"><em>stk_enc_ptr</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>stk_name</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>stk_init_file</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>stk_init_line</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>stk_init_func</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<hr  />
-<p> Initializes stack </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">stk_enc_ptr</td><td>Encoded pointer to stack sructure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_name</td><td>Name of stack pointer variable </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_init_file</td><td>Name of file where stack is initialized </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_init_line</td><td>Number of line where stack is initialized </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_init_func</td><td>Name of function where stack is initialized </td></tr>
-  </table>
-  </dd>
-</dl>
-<h2><a class="anchor" id="autotoc_md1"></a>
-autotoc_md1</h2>
-<dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
 </div>
@@ -370,6 +369,24 @@ autotoc_md2</h2>
 autotoc_md3</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a02df600d9f9d5364d186505f04a6f69b" name="a02df600d9f9d5364d186505f04a6f69b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02df600d9f9d5364d186505f04a6f69b">&#9670;&#160;</a></span>DIF_STACK_INIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DIF_STACK_INIT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code hl_struct" href="structstack__t.html">stack_t</a>* stk = (<a class="code hl_struct" href="structstack__t.html">stack_t</a>*) calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structstack__t.html">stack_t</a>))</div>
+<div class="ttc" id="astructstack__t_html"><div class="ttname"><a href="structstack__t.html">stack_t</a></div><div class="ttdoc">Sructure with stack info.</div><div class="ttdef"><b>Definition</b> stack.cpp:48</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

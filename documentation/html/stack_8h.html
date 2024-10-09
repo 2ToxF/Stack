@@ -93,11 +93,12 @@ $(function(){ initResizable(false); });
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">stack.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="debug__mode_8h_source.html">debug_mode.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="settings_8h_source.html">settings.h</a>&quot;</code><br />
 </div>
 <p><a href="stack_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -127,8 +128,13 @@ Macros</h2></td></tr>
 <tr class="memitem:aeaf3a04d5bf63b204689a714718ea930" id="r_aeaf3a04d5bf63b204689a714718ea930"><td class="memItemLeft" align="right" valign="top"><a id="aeaf3a04d5bf63b204689a714718ea930" name="aeaf3a04d5bf63b204689a714718ea930"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>WHT</b>&#160;&#160;&#160;&quot;\033[0;37m&quot;</td></tr>
 <tr class="separator:aeaf3a04d5bf63b204689a714718ea930"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bdd7c1369b250215a080e8421d4ecf3" id="r_a1bdd7c1369b250215a080e8421d4ecf3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bdd7c1369b250215a080e8421d4ecf3">ON_DEBUG</a>(...)</td></tr>
-<tr class="memdesc:a1bdd7c1369b250215a080e8421d4ecf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is replaced with it's arguements only in debug mode.  <br /></td></tr>
+<tr class="memitem:a81a2e678408c3a60d5e452fdfc3a4114" id="r_a81a2e678408c3a60d5e452fdfc3a4114"><td class="memItemLeft" align="right" valign="top"><a id="a81a2e678408c3a60d5e452fdfc3a4114" name="a81a2e678408c3a60d5e452fdfc3a4114"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DIF_STACK_INIT</b>&#160;&#160;&#160;<a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> StackInit(size_t* stk_enc_ptr)</td></tr>
+<tr class="memdesc:a81a2e678408c3a60d5e452fdfc3a4114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Differently defined StackInit() function depending on debug mode. <br /></td></tr>
+<tr class="separator:a81a2e678408c3a60d5e452fdfc3a4114"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bdd7c1369b250215a080e8421d4ecf3" id="r_a1bdd7c1369b250215a080e8421d4ecf3"><td class="memItemLeft" align="right" valign="top"><a id="a1bdd7c1369b250215a080e8421d4ecf3" name="a1bdd7c1369b250215a080e8421d4ecf3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ON_DEBUG</b>(...)</td></tr>
+<tr class="memdesc:a1bdd7c1369b250215a080e8421d4ecf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is replaced with it's arguements only in debug mode. <br /></td></tr>
 <tr class="separator:a1bdd7c1369b250215a080e8421d4ecf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb2828f07099e672463abe8410adaf5b" id="r_adb2828f07099e672463abe8410adaf5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb2828f07099e672463abe8410adaf5b">CREATE_STACK</a>(stk_enc_ptr)</td></tr>
 <tr class="memdesc:adb2828f07099e672463abe8410adaf5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates stack structure depending on debug mode.  <br /></td></tr>
@@ -144,23 +150,23 @@ typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>StackElem_t</b
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a4890027e84c3d8fa2a1701b5689a10ad" id="r_a4890027e84c3d8fa2a1701b5689a10ad"><td class="memItemLeft" align="right" valign="top"><a id="a4890027e84c3d8fa2a1701b5689a10ad" name="a4890027e84c3d8fa2a1701b5689a10ad"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> { <br />
-&#160;&#160;<b>NO_ERROR</b>
-, <b>CANT_CREATE_RAND_NUM_ERR</b>
-, <b>STACK_ALREADY_INITED_ERR</b>
-, <b>NULL_STK_STRUCT_PTR_ERR</b>
+&#160;&#160;<b>NO_ERROR</b> = 0u
+, <b>CANT_CREATE_RAND_NUM_ERR</b> = 1u
+, <b>STACK_ALREADY_INITED_ERR</b> = 2u
+, <b>NULL_STK_STRUCT_PTR_ERR</b> = 4u
 , <br />
-&#160;&#160;<b>NULL_STK_DATA_PTR_ERR</b>
-, <b>NEG_STK_CAPACITY_ERR</b>
-, <b>STACK_ANTIOVERFLOW_ERR</b>
-, <b>STACK_OVERFLOW_ERR</b>
+&#160;&#160;<b>NULL_STK_DATA_PTR_ERR</b> = 8u
+, <b>NEG_STK_CAPACITY_ERR</b> = 16u
+, <b>STACK_ANTIOVERFLOW_ERR</b> = 32u
+, <b>STACK_OVERFLOW_ERR</b> = 64u
 , <br />
-&#160;&#160;<b>OUT_OF_MEMORY_ERR</b>
-, <b>STACK_USES_MUCH_MEM_ERR</b>
-, <b>STKSTRUCT_CANARY_CORRUPT_ERR</b>
-, <b>STKDATA_CANARY_CORRUPT_ERR</b>
+&#160;&#160;<b>OUT_OF_MEMORY_ERR</b> = 128u
+, <b>STACK_USES_MUCH_MEM_ERR</b> = 256u
+, <b>STKSTRUCT_CANARY_CORRUPT_ERR</b> = 512u
+, <b>STKDATA_CANARY_CORRUPT_ERR</b> = 1024u
 , <br />
-&#160;&#160;<b>STKSTRUCT_INFO_CORRUPT_ERR</b>
-, <b>STKDATA_INFO_CORRUPT_ERR</b>
+&#160;&#160;<b>STKSTRUCT_INFO_CORRUPT_ERR</b> = 2048u
+, <b>STKDATA_INFO_CORRUPT_ERR</b> = 4096u
 <br />
  }</td></tr>
 <tr class="memdesc:a4890027e84c3d8fa2a1701b5689a10ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated types of code errors or 0 for "no error"-state. <br /></td></tr>
@@ -169,14 +175,17 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae003ac2f082ded3119f6c2c7b6eb3651" id="r_ae003ac2f082ded3119f6c2c7b6eb3651"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae003ac2f082ded3119f6c2c7b6eb3651">StackDtor</a> (size_t *stk_enc_ptr)</td></tr>
-<tr class="memdesc:ae003ac2f082ded3119f6c2c7b6eb3651"><td class="mdescLeft">&#160;</td><td class="mdescRight">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  <br /></td></tr>
 <tr class="separator:ae003ac2f082ded3119f6c2c7b6eb3651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a913b5776681c6c1fe579e0aba4c6a767" id="r_a913b5776681c6c1fe579e0aba4c6a767"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a> (size_t *stk_enc_ptr, const char *stk_name, const char *stk_init_file, int stk_init_line, const char *stk_init_func)</td></tr>
-<tr class="separator:a913b5776681c6c1fe579e0aba4c6a767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac101f32b1c286f0bd6721fae85f52945" id="r_ac101f32b1c286f0bd6721fae85f52945"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac101f32b1c286f0bd6721fae85f52945">StackPop</a> (size_t stk_enc_ptr, <a class="el" href="#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> *var)</td></tr>
 <tr class="separator:ac101f32b1c286f0bd6721fae85f52945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36b84d9fff9c3d894301d8d3e459b8f3" id="r_a36b84d9fff9c3d894301d8d3e459b8f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36b84d9fff9c3d894301d8d3e459b8f3">StackPush</a> (size_t stk_enc_ptr, <a class="el" href="#ad060f460c093578e6a06c3c6fd730857">StackElem_t</a> value)</td></tr>
 <tr class="separator:a36b84d9fff9c3d894301d8d3e459b8f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a02df600d9f9d5364d186505f04a6f69b" id="r_a02df600d9f9d5364d186505f04a6f69b"><td class="memItemLeft" align="right" valign="top"><a id="a02df600d9f9d5364d186505f04a6f69b" name="a02df600d9f9d5364d186505f04a6f69b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DIF_STACK_INIT</b></td></tr>
+<tr class="separator:a02df600d9f9d5364d186505f04a6f69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File with constructions for main work with stack </p>
@@ -195,30 +204,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><a class="code hl_function" href="#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a>(stk_enc_ptr, #stk_enc_ptr, __FILE__, __LINE__, __PRETTY_FUNCTION__)</div>
-<div class="ttc" id="astack_8h_html_a913b5776681c6c1fe579e0aba4c6a767"><div class="ttname"><a href="#a913b5776681c6c1fe579e0aba4c6a767">StackInit</a></div><div class="ttdeci">CodeError StackInit(size_t *stk_enc_ptr, const char *stk_name, const char *stk_init_file, int stk_init_line, const char *stk_init_func)</div><div class="ttdef"><b>Definition</b> stack.cpp:225</div></div>
+<b>Value:</b><div class="fragment"><div class="line">StackInit(stk_enc_ptr)</div>
 </div><!-- fragment -->
 <p>Creates stack structure depending on debug mode. </p>
-
-</div>
-</div>
-<a id="a1bdd7c1369b250215a080e8421d4ecf3" name="a1bdd7c1369b250215a080e8421d4ecf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1bdd7c1369b250215a080e8421d4ecf3">&#9670;&#160;</a></span>ON_DEBUG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ON_DEBUG</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">__VA_ARGS__</div>
-</div><!-- fragment -->
-<p>Is replaced with it's arguements only in debug mode. </p>
 
 </div>
 </div>
@@ -237,69 +225,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </p>
 <hr  />
 <p> Destruct stack </p>
 <h2><a class="anchor" id="autotoc_md0"></a>
 autotoc_md0</h2>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">stk_enc_ptr</td><td>Encoded pointer to stack sructure</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </p>
-
-</div>
-</div>
-<a id="a913b5776681c6c1fe579e0aba4c6a767" name="a913b5776681c6c1fe579e0aba4c6a767"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a913b5776681c6c1fe579e0aba4c6a767">&#9670;&#160;</a></span>StackInit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#a4890027e84c3d8fa2a1701b5689a10ad">CodeError</a> StackInit </td>
-          <td>(</td>
-          <td class="paramtype">size_t *</td>          <td class="paramname"><span class="paramname"><em>stk_enc_ptr</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>stk_name</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>stk_init_file</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>stk_init_line</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>stk_init_func</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<hr  />
-<p> Initializes stack </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">stk_enc_ptr</td><td>Encoded pointer to stack sructure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_name</td><td>Name of stack pointer variable </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_init_file</td><td>Name of file where stack is initialized </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_init_line</td><td>Number of line where stack is initialized </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">stk_init_func</td><td>Name of function where stack is initialized </td></tr>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md1"></a>
-autotoc_md1</h2>
-<dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
 </div>
@@ -329,8 +264,8 @@ autotoc_md1</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md2"></a>
-autotoc_md2</h2>
+<h2><a class="anchor" id="autotoc_md1"></a>
+autotoc_md1</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>
@@ -361,8 +296,8 @@ autotoc_md2</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md3"></a>
-autotoc_md3</h2>
+<h2><a class="anchor" id="autotoc_md2"></a>
+autotoc_md2</h2>
 <dl class="section return"><dt>Returns</dt><dd>Type of code error or 0 for "no error"-state </dd></dl>
 
 </div>

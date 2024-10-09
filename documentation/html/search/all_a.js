@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['usage_0',['Usage',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
-  ['utils_2eh_1',['utils.h',['../utils_8h.html',1,'']]]
+  ['toxic_20s_20stack_0',['Toxic&apos;s Stack',['../md__r_e_a_d_m_e.html',1,'']]]
 ];
