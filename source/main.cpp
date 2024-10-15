@@ -9,30 +9,29 @@
 #include "input_output.h"
 #include "stack.h"
 
-CodeError run_program();
+CodeError RunProgram();
+
 
 int main()
 {
-    CodeError code_err = run_program();
-    print_code_error(code_err);
+    CodeError code_err = RunProgram();
+    PrintCodeError(code_err);
     return code_err;
 }
 
 
-CodeError run_program()
+CodeError RunProgram()
 {
-    CodeError code_err = NO_ERROR;
-
     size_t stack = 0;
-    if ((code_err = CREATE_STACK(&stack)) != NO_ERROR)
-        return code_err;
+    if (CREATE_STACK(&stack) != STK_NO_ERROR)
+        return STACK_ERR;
 
     int numbers_counter = 0;
     printf("begin\n");
     for (StackElem_t i = 2; i < 100; i++)
     {
-        if ((code_err = StackPush(stack, i)) != NO_ERROR)
-            return code_err;
+        if (StackPush(stack, i) != STK_NO_ERROR)
+            return STACK_ERR;
 
         printf("num_to_put = %d\n", i);
         numbers_counter++;
@@ -43,13 +42,13 @@ CodeError run_program()
     printf("\n\nprint result\n");
     for (int i = 2; i < 100; i++)
     {
-        if ((code_err = StackPop(stack, &var_for_print)) != NO_ERROR)
-            return code_err;
+        if (StackPop(stack, &var_for_print) != STK_NO_ERROR)
+            return STACK_ERR;
 
         printf("var_for_print = %d\n", var_for_print);
         printed_numbers_counter++;
     }
 
     StackDtor(&stack);
-    return code_err;
+    return NO_ERROR;
 }

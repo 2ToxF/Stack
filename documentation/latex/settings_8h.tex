@@ -1,12 +1,28 @@
 \doxysection{include/settings.h File Reference}
 \hypertarget{settings_8h}{}\label{settings_8h}\index{include/settings.h@{include/settings.h}}
-\doxysubsubsection*{Macros}
+\doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{settings_8h_a8de3ed741dadc9c979a4ff17c0a9116e}\label{settings_8h_a8de3ed741dadc9c979a4ff17c0a9116e} 
-\#define {\bfseries NDEBUG}
+enum \mbox{\hyperlink{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \{ {\bfseries NO\+\_\+\+ERROR}
+, {\bfseries STACK\+\_\+\+ERR}
+ \}
 \begin{DoxyCompactList}\small\item\em Debug mode (if macro is defined then debug-\/mode off) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 FIle with one macros which defines debug mode 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}\index{settings.h@{settings.h}!CodeError@{CodeError}}
+\index{CodeError@{CodeError}!settings.h@{settings.h}}
+\doxysubsubsection{\texorpdfstring{CodeError}{CodeError}}
+{\footnotesize\ttfamily \label{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad} 
+enum \mbox{\hyperlink{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}}}
+
+
+
+Debug mode (if macro is defined then debug-\/mode off) 
+
+If defined no canaries will be set up
+
+If defined no hash will be used 
