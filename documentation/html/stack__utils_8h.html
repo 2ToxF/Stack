@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Toxic&#39;s Stack: include/debug_mode.h Source File</title>
+<title>Toxic&#39;s Stack: include/stack_utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,17 +89,73 @@ $(function(){ initResizable(false); });
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="headertitle"><div class="title">debug_mode.h</div></div>
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">stack_utils.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="debug__mode_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef DEBUG_MODE_H</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define DEBUG_MODE_H</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="debug__mode_8h.html#a8de3ed741dadc9c979a4ff17c0a9116e">   10</a></span><span class="preprocessor">#define NDEBUG</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
-</div><!-- fragment --></div><!-- contents -->
+<div class="textblock"><code>#include &quot;<a class="el" href="settings_8h_source.html">settings.h</a>&quot;</code><br />
+</div>
+<p><a href="stack__utils_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa4870d1ec414f99151e9f7ea3615d2c7" id="r_aa4870d1ec414f99151e9f7ea3615d2c7"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4870d1ec414f99151e9f7ea3615d2c7">MyGetRandom64</a> ()</td></tr>
+<tr class="separator:aa4870d1ec414f99151e9f7ea3615d2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e5019a6d83cfa466777f5e140d62c8" id="r_a76e5019a6d83cfa466777f5e140d62c8"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76e5019a6d83cfa466777f5e140d62c8">MyHash</a> (void *ptr, int number_of_bytes)</td></tr>
+<tr class="separator:a76e5019a6d83cfa466777f5e140d62c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>File with utilities </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aa4870d1ec414f99151e9f7ea3615d2c7" name="aa4870d1ec414f99151e9f7ea3615d2c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4870d1ec414f99151e9f7ea3615d2c7">&#9670;&#160;</a></span>MyGetRandom64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t MyGetRandom64 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get random number </p><dl class="section return"><dt>Returns</dt><dd>Random number as an unsigned long </dd></dl>
+
+</div>
+</div>
+<a id="a76e5019a6d83cfa466777f5e140d62c8" name="a76e5019a6d83cfa466777f5e140d62c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e5019a6d83cfa466777f5e140d62c8">&#9670;&#160;</a></span>MyHash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long MyHash </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>number_of_bytes</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hashes info using DJB2 algorithm </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ptr</td><td>Pointer to the first byte </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">number_of_bytes</td><td>Number of bytes that should be hashed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Hash &lt;number_of_butes&gt; elements with the first one on &lt;ptr&gt; </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0

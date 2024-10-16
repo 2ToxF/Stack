@@ -3,8 +3,8 @@
     File with utilities
 */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef STACK_UTILS_H
+#define STACK_UTILS_H
 
 #include "settings.h"
 

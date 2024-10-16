@@ -1,3 +1,12 @@
+# files only needed in this project
+include/input_output.h
+settings.h
+
+source/main.cpp
+source/input_output.cpp
+
+Makefile
+
 # .exe
 *.exe
 

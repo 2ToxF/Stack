@@ -7,7 +7,7 @@
 
 #include "input_output.h"
 #include "stack.h"
-#include "utils.h"
+#include "stack_utils.h"
 
 /// @brief Type of canaries on the stack sides
 typedef uint64_t canary_t;

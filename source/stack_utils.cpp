@@ -1,7 +1,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "utils.h"
+#include "stack_utils.h"
 
 /// @brief Maximum number of retries while looking for random number
 static const uint64_t MAX_RAND_RETRIES = 10;
