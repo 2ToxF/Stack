@@ -18,29 +18,17 @@ EXE := Stack.exe
 
 DOCS_NAME := Docs_config
 
-all: $(OBJ_DIR) $(EXE)
+all: $(OBJ_DIR) $(OBJECTS)
 
 $(OBJ_DIR):
 	@mkdir $@
 
-$(EXE): $(OBJECTS)
-	@$(CC) $(OBJECTS) -o $@
-
 $(OBJECTS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDES)
-	@$(CC) -c $(DED_FLAGS) $(ADD_FLAGS) -I$(INC_DIR) $< -o $@
-
-run: $(EXE)
-	@$(EXE)
+	@$(CC) -c $(DED_FLAGS) $(ADD_FLAGS) -I$(INC_DIR) -I../$(INC_DIR) $< -o $@
+	@cp $@ ../$(OBJ_DIR)
 
 docs:
 	doxygen $(DOCS_NAME)
 
-clean_exe:
-	rm *.exe
-
-clean_obj:
-	rm $(OBJ_DIR)/*.o
-
 clean:
 	rm $(OBJ_DIR)/*.o
-	rm *.exe
