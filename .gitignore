@@ -5,6 +5,8 @@ settings.h
 source/main.cpp
 source/input_output.cpp
 
+Makefile
+
 # .exe
 *.exe
 
