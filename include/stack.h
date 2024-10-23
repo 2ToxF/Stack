@@ -22,9 +22,6 @@
     #define CREATE_STACK(stk_enc_ptr) StackInit(stk_enc_ptr)
 #endif
 
-/// @brief Type of stack elements
-typedef int StackElem_t;
-
 /// @brief Enumerated types of stack errors or 0 for "no error"-state
 enum StackError
 {
