@@ -6,6 +6,8 @@
 #ifndef STACK_UTILS_H
 #define STACK_UTILS_H
 
+#include <stdint.h>
+
 #include "settings.h"
 
 /*!
