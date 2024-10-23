@@ -338,6 +338,8 @@ StackError StackPop(size_t stk_enc_ptr, StackElem_t* var)
     *var = stk->data[stk->index];
     stk->data[stk->index] = 0;
 
+    StackDump(stk, __FILE__, __LINE__);
+
     STACK_HASH(stk);
     STACK_VERIFY(stk);
     return STK_NO_ERROR;
@@ -546,7 +548,7 @@ static StackError StackVerifyAll(stack_t* stk)
                     sprintf(index_string, "*[%d]", (idx));                          \
                 else                                                                \
                     sprintf(index_string, "*[%d - %d]", idx_first_of_same, (idx));  \
-                printf("\t\t%-12s  =  %d\n", index_string, stk->data[idx]);         \
+                printf("\t\t%-12s  =  %lf\n", index_string, stk->data[idx]);         \
                 idx_first_of_same = (idx + 1);                                      \
             }
 
@@ -567,7 +569,7 @@ static StackError StackVerifyAll(stack_t* stk)
 
         for (int i = 1; i < stk->capacity; i++)
         {
-            if (stk->data[i] != stk->data[i-1])
+            if (!IsEqual(stk->data[i], stk->data[i-1]))
                 PRINT_CELLS_VALUE_(i-1);
         }
         PRINT_CELLS_VALUE_(stk->capacity-1);

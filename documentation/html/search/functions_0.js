@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mygetrandom64_0',['MyGetRandom64',['../stack__utils_8h.html#aa4870d1ec414f99151e9f7ea3615d2c7',1,'stack_utils.cpp']]],
-  ['myhash_1',['MyHash',['../stack__utils_8h.html#a76e5019a6d83cfa466777f5e140d62c8',1,'stack_utils.cpp']]]
+  ['isequal_0',['IsEqual',['../stack__utils_8h.html#ab9f41bd54da12defd6f5cc16988bcccf',1,'stack_utils.cpp']]]
 ];

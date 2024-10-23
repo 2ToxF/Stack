@@ -31,6 +31,7 @@
         "text_encoding": "cpp",
         "typeinfo": "cpp",
         "cassert": "cpp",
-        "compare": "cpp"
+        "compare": "cpp",
+        "cmath": "cpp"
     }
 }

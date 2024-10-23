@@ -8,12 +8,6 @@
 \begin{DoxyCompactList}\small\item\em Is replaced with it\textquotesingle{}s arguements only in debug mode. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{stack_8h_adb2828f07099e672463abe8410adaf5b}{CREATE\+\_\+\+STACK}}(stk\+\_\+enc\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Creates stack structure depending on debug mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-\Hypertarget{stack_8h_ad060f460c093578e6a06c3c6fd730857}\label{stack_8h_ad060f460c093578e6a06c3c6fd730857} 
-typedef int {\bfseries Stack\+Elem\+\_\+t}
-\begin{DoxyCompactList}\small\item\em Type of stack elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -43,9 +37,9 @@ enum \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}}
 \item 
 \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_a9de482fbaf42578591717f72543a7a69}{Stack\+Dtor}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr)
 \item 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_ab270232b09b3eec5c330e6ab79e138f3}{Stack\+Pop}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}var)
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_ab270232b09b3eec5c330e6ab79e138f3}{Stack\+Pop}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}var)
 \item 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_a42d67b51bf0ce6bfc20e4361df927820}{Stack\+Push}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} value)
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_a42d67b51bf0ce6bfc20e4361df927820}{Stack\+Push}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}} value)
 \item 
 \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_ab1e04aca91ddcd525d79bc417509832d}{Stack\+Init}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr, const char \texorpdfstring{$\ast$}{*}stk\+\_\+name, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+file, int stk\+\_\+init\+\_\+line, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+func)
 \end{DoxyCompactItemize}
@@ -120,7 +114,7 @@ Type of stack error or 0 for "{}no error"{}-\/state
 \index{StackPop@{StackPop}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
 {\footnotesize\ttfamily \label{stack_8h_ab270232b09b3eec5c330e6ab79e138f3} 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
  Extractes value from stack 
@@ -138,7 +132,7 @@ Type of stack error or 0 for "{}no error"{}-\/state
 \index{StackPush@{StackPush}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
 {\footnotesize\ttfamily \label{stack_8h_a42d67b51bf0ce6bfc20e4361df927820} 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{stack_8h_ad060f460c093578e6a06c3c6fd730857}{Stack\+Elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
  Extractes value from stack 

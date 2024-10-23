@@ -4,6 +4,8 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+bool \mbox{\hyperlink{stack__utils_8h_ab9f41bd54da12defd6f5cc16988bcccf}{Is\+Equal}} (double num1, double num2)
+\item 
 uint64\+\_\+t \mbox{\hyperlink{stack__utils_8h_aa4870d1ec414f99151e9f7ea3615d2c7}{My\+Get\+Random64}} ()
 \item 
 unsigned long \mbox{\hyperlink{stack__utils_8h_a76e5019a6d83cfa466777f5e140d62c8}{My\+Hash}} (void \texorpdfstring{$\ast$}{*}ptr, int number\+\_\+of\+\_\+bytes)
@@ -14,13 +16,29 @@ unsigned long \mbox{\hyperlink{stack__utils_8h_a76e5019a6d83cfa466777f5e140d62c8
 File with utilities 
 
 \doxysubsection{Function Documentation}
+\Hypertarget{stack__utils_8h_ab9f41bd54da12defd6f5cc16988bcccf}\index{stack\_utils.h@{stack\_utils.h}!IsEqual@{IsEqual}}
+\index{IsEqual@{IsEqual}!stack\_utils.h@{stack\_utils.h}}
+\doxysubsubsection{\texorpdfstring{IsEqual()}{IsEqual()}}
+{\footnotesize\ttfamily \label{stack__utils_8h_ab9f41bd54da12defd6f5cc16988bcccf} 
+bool Is\+Equal (\begin{DoxyParamCaption}\item[{double}]{num1}{, }\item[{double}]{num2}{}\end{DoxyParamCaption})}
+
+Checks whether two doubles are equal or not 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em num1} & First number to compare \\
+\hline
+\mbox{\texttt{ in}}  & {\em num1} & Second number to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True (if numbers are equal), false (otherwise) 
+\end{DoxyReturn}
 \Hypertarget{stack__utils_8h_aa4870d1ec414f99151e9f7ea3615d2c7}\index{stack\_utils.h@{stack\_utils.h}!MyGetRandom64@{MyGetRandom64}}
 \index{MyGetRandom64@{MyGetRandom64}!stack\_utils.h@{stack\_utils.h}}
 \doxysubsubsection{\texorpdfstring{MyGetRandom64()}{MyGetRandom64()}}
 {\footnotesize\ttfamily \label{stack__utils_8h_aa4870d1ec414f99151e9f7ea3615d2c7} 
 uint64\+\_\+t My\+Get\+Random64 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-Get random number \begin{DoxyReturn}{Returns}
+Gets random number \begin{DoxyReturn}{Returns}
 Random number as an unsigned long 
 \end{DoxyReturn}
 \Hypertarget{stack__utils_8h_a76e5019a6d83cfa466777f5e140d62c8}\index{stack\_utils.h@{stack\_utils.h}!MyHash@{MyHash}}

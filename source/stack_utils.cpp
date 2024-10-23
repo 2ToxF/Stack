@@ -1,7 +1,11 @@
 #include <limits.h>
+#include <math.h>
 #include <stdint.h>
 
 #include "stack_utils.h"
+
+/// @brief Max difference between two double-type numbers which we accept as equal
+static const double   PRECISION_COEF   = 1E-8;
 
 /// @brief Maximum number of retries while looking for random number
 static const uint64_t MAX_RAND_RETRIES = 10;
@@ -18,6 +22,14 @@ static const int           HASH_SHIFT_COEF = 5;
 /// @brief Start value of temporary hash
 static const unsigned long START_HASH      = 5381;
 
+//----------------------------------------------------------------------------------------------------------------------
+
+bool IsEqual(double num1, double num2)
+{
+    return fabs(num1 - num2) <= PRECISION_COEF;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 
 uint64_t MyGetRandom64()
 {

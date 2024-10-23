@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['printcodeerror_0',['PrintCodeError',['../input__output_8h.html#a99b68857e35f31eb30d0085f196a9ea2',1,'input_output.cpp']]]
+  ['mygetrandom64_0',['MyGetRandom64',['../stack__utils_8h.html#aa4870d1ec414f99151e9f7ea3615d2c7',1,'stack_utils.cpp']]],
+  ['myhash_1',['MyHash',['../stack__utils_8h.html#a76e5019a6d83cfa466777f5e140d62c8',1,'stack_utils.cpp']]]
 ];

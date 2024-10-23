@@ -3,9 +3,9 @@ var indexSectionsWithContent =
   0: "acdfimopstu",
   1: "s",
   2: "is",
-  3: "mps",
+  3: "imps",
   4: "s",
-  5: "cs",
+  5: "s",
   6: "co",
   7: "st"
 };

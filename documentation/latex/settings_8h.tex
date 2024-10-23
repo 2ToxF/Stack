@@ -1,23 +1,29 @@
 \doxysection{include/settings.h File Reference}
 \hypertarget{settings_8h}{}\label{settings_8h}\index{include/settings.h@{include/settings.h}}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef double \mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Debug mode (if macro is defined then debug-\/mode off) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}} \{ {\bfseries NO\+\_\+\+ERROR}
+\Hypertarget{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}\label{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad} 
+enum {\bfseries Code\+Error} \{ {\bfseries NO\+\_\+\+ERROR}
 , {\bfseries STACK\+\_\+\+ERR}
  \}
-\begin{DoxyCompactList}\small\item\em Debug mode (if macro is defined then debug-\/mode off) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 FIle with settings 
 
-\doxysubsection{Enumeration Type Documentation}
-\Hypertarget{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}\index{settings.h@{settings.h}!CodeError@{CodeError}}
-\index{CodeError@{CodeError}!settings.h@{settings.h}}
-\doxysubsubsection{\texorpdfstring{CodeError}{CodeError}}
-{\footnotesize\ttfamily \label{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad} 
-enum \mbox{\hyperlink{settings_8h_a4890027e84c3d8fa2a1701b5689a10ad}{Code\+Error}}}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{settings_8h_a9719da99103169a38a529237e4339b79}\index{settings.h@{settings.h}!StackElem\_t@{StackElem\_t}}
+\index{StackElem\_t@{StackElem\_t}!settings.h@{settings.h}}
+\doxysubsubsection{\texorpdfstring{StackElem\_t}{StackElem\_t}}
+{\footnotesize\ttfamily \label{settings_8h_a9719da99103169a38a529237e4339b79} 
+typedef double \mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}}}
 
 
 
@@ -25,4 +31,6 @@ Debug mode (if macro is defined then debug-\/mode off)
 
 If defined no canaries will be set up
 
-If defined no hash will be used 
+If defined no hash will be used
+
+Type of stack elements 
