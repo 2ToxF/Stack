@@ -263,6 +263,12 @@ StackError StackDtor(size_t* stk_enc_ptr)
     StackError StackInit(size_t* stk_enc_ptr)
 #endif
 {
+    if (key_for_ptr_dec == 0)
+    {
+        if ((key_for_ptr_dec = MyGetRandom64()) == 0)
+            return CANT_CREATE_RAND_NUM_ERR;
+    }
+
     stack_t* stk = (stack_t*) calloc(1, sizeof(stack_t));
     /* Накладные расходы:
        1) память - выделяется больше, чем надо (точное количество зависит от компилятора)
@@ -270,8 +276,9 @@ StackError StackDtor(size_t* stk_enc_ptr)
           (если их недостаточно, то придётся искать доп. память)                             */
 
     #ifndef NDEBUG
-        if (stk->data != NULL || stk->index != 0 || stk->capacity != 0)
+        if (*stk_enc_ptr != 0)
         {
+            stk = (stack_t*) StackPtrXOR(*stk_enc_ptr);
             StackDump(stk, __FILE__, __LINE__);
             return STACK_ALREADY_INITED_ERR;
         }
@@ -281,12 +288,6 @@ StackError StackDtor(size_t* stk_enc_ptr)
         stk->init_line = stk_init_line;
         stk->init_func = stk_init_func;
     #endif
-
-    if (key_for_ptr_dec == 0)
-    {
-        if ((key_for_ptr_dec = MyGetRandom64()) == 0)
-            return CANT_CREATE_RAND_NUM_ERR;
-    }
 
     #ifndef NCANARIES_MODE
         stk->left_canary = stk->right_canary = STACK_CANARY_VALUE;
