@@ -338,8 +338,6 @@ StackError StackPop(size_t stk_enc_ptr, StackElem_t* var)
     *var = stk->data[stk->index];
     stk->data[stk->index] = 0;
 
-    StackDump(stk, __FILE__, __LINE__);
-
     STACK_HASH(stk);
     STACK_VERIFY(stk);
     return STK_NO_ERROR;
