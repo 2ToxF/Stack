@@ -323,6 +323,9 @@ StackError StackPop(size_t stk_enc_ptr, StackElem_t* var)
     StackError code_err = STK_NO_ERROR;
         if (stk->index == 0)
         {
+            stk->code_errors |= STACK_ANTIOVERFLOW_ERR;
+            StackHash(stk);
+
             #ifndef NDEBUG
                 StackDump(stk, __FILE__, __LINE__);
             #endif
@@ -334,7 +337,7 @@ StackError StackPop(size_t stk_enc_ptr, StackElem_t* var)
         if ((code_err = StackResizeDown(stk)) != STK_NO_ERROR)
             return code_err;
 
-    stk->index--;
+    --stk->index;
     *var = stk->data[stk->index];
     stk->data[stk->index] = 0;
 
@@ -357,7 +360,7 @@ StackError StackPush(size_t stk_enc_ptr, StackElem_t value)
             return code_err;
 
     stk->data[stk->index] = value;
-    stk->index++;
+    ++stk->index;
 
     STACK_HASH(stk);
     STACK_VERIFY(stk);
@@ -384,7 +387,10 @@ static StackError StackResizeDown(stack_t* stk)
                                         stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
 
         if (new_data == NULL)
+        {
+            stk->code_errors |= OUT_OF_MEMORY_ERR;
             return OUT_OF_MEMORY_ERR;
+        }
 
         *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
     #else
@@ -414,7 +420,10 @@ static StackError StackResizeUp(stack_t* stk)
                                         stk->capacity*sizeof(StackElem_t) + SIZE_OF_CANARY*2) + SIZE_OF_CANARY;
 
         if (new_data == NULL)
+        {
+            stk->code_errors |= OUT_OF_MEMORY_ERR;
             return OUT_OF_MEMORY_ERR;
+        }
 
         *((canary_t*) (new_data + stk->capacity*sizeof(StackElem_t))) = DATA_CANARY_VALUE;
     #else
@@ -551,7 +560,8 @@ static StackError StackVerifyAll(stack_t* stk)
             }
 
 
-        printf(RED "stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
+        printf(RED "STACK ERROR: %u\n", stk->code_errors);
+        printf("stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
             stk->stk_name, stk,
             file_name, line_number,
             stk->init_file, stk->init_line, stk->init_func);
