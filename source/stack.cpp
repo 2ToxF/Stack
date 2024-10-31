@@ -143,33 +143,25 @@ static StackError StackVerifyCritical(stack_t* stk);
 
 
 #ifndef NDEBUG
-    /*!
-        Prints stack info (ONLY DEFINED IN DEBUG MODE)
-        \param[in]  stk          Pointer to structure of stack that should be printed
-        \param[in]  file_name    Name of file where function was called
-        \param[in]  line_number  Number of line where function was called
-    */
-    void StackDump(const stack_t* stk, const char* file_name, int line_number);
-
     /// @brief Macro for verifying stack
-    #define STACK_VERIFY(stk)                                           \
-        do                                                              \
-        {                                                               \
-            StackError temp_code_err = STK_NO_ERROR;                     \
-            if ((temp_code_err = StackVerifyAll(stk)) != STK_NO_ERROR)  \
-            {                                                           \
-                if (temp_code_err >= STACK_ANTIOVERFLOW_ERR)            \
-                    StackDump(stk, __FILE__, __LINE__);                 \
-                return temp_code_err;                                   \
-            }                                                           \
+    #define STACK_VERIFY(stk)                                                    \
+        do                                                                       \
+        {                                                                        \
+            StackError temp_code_err = STK_NO_ERROR;                             \
+            if ((temp_code_err = StackVerifyAll(stk)) != STK_NO_ERROR)           \
+            {                                                                    \
+                if (temp_code_err >= STACK_ANTIOVERFLOW_ERR)                     \
+                    StackDump(StackPtrXOR((size_t) stk), __FILE__, __LINE__);    \
+                return temp_code_err;                                            \
+            }                                                                    \
         } while(0)
 #else
     /// @brief Macro for verifying stack
-    #define STACK_VERIFY(stk)                                    \
-        do {                                                     \
-            StackError temp_code_err = STK_NO_ERROR;                  \
-            if ((temp_code_err = StackVerifyAll(stk)) != STK_NO_ERROR)  \
-                return temp_code_err;                            \
+    #define STACK_VERIFY(stk)                                                    \
+        do {                                                                     \
+            StackError temp_code_err = STK_NO_ERROR;                             \
+            if ((temp_code_err = StackVerifyAll(stk)) != STK_NO_ERROR)           \
+                return temp_code_err;                                            \
         } while(0)
 #endif
 
@@ -256,7 +248,7 @@ StackError StackDtor(size_t* stk_enc_ptr)
 
 #ifndef NDEBUG
     StackError StackInit(size_t* stk_enc_ptr, const char* stk_name, const char* stk_init_file,
-                        int stk_init_line, const char* stk_init_func)
+                         int stk_init_line, const char* stk_init_func)
 #else
     StackError StackInit(size_t* stk_enc_ptr)
 #endif
@@ -277,7 +269,7 @@ StackError StackDtor(size_t* stk_enc_ptr)
         if (*stk_enc_ptr != 0)
         {
             stk = (stack_t*) StackPtrXOR(*stk_enc_ptr);
-            StackDump(stk, __FILE__, __LINE__);
+            StackDump(StackPtrXOR((size_t) stk), __FILE__, __LINE__);
             return STACK_ALREADY_INITED_ERR;
         }
 
@@ -326,7 +318,7 @@ StackError StackPop(size_t stk_enc_ptr, StackElem_t* var)
             StackHash(stk);
 
             #ifndef NDEBUG
-                StackDump(stk, __FILE__, __LINE__);
+                StackDump(StackPtrXOR((size_t) stk), __FILE__, __LINE__);
             #endif
 
             return STACK_ANTIOVERFLOW_ERR;
@@ -543,8 +535,10 @@ static StackError StackVerifyAll(stack_t* stk)
 
 
 #ifndef NDEBUG
-    void StackDump(const stack_t* stk, const char* file_name, int line_number)
+    void StackDump(size_t stk_enc_ptr, const char* file_name, int line_number)
     {
+        stack_t* stk = (stack_t*) StackPtrXOR(stk_enc_ptr);
+
         int idx_first_of_same = 0;
         char index_string[MAX_TEMP_DUMP_STR_LEN] = {};
 
@@ -554,25 +548,24 @@ static StackError StackVerifyAll(stack_t* stk)
                     sprintf(index_string, "*[%d]", (idx));                          \
                 else                                                                \
                     sprintf(index_string, "*[%d - %d]", idx_first_of_same, (idx));  \
-                printf("\t\t%-12s  =  %lf\n", index_string, stk->data[idx]);         \
+                printf("\t\t%-12s  =  %lg\n", index_string, stk->data[idx]);        \
                 idx_first_of_same = (idx + 1);                                      \
             }
 
 
         printf(RED "STACK ERROR: %u\n", stk->code_errors);
-        printf("stack_t " MAG "%s [0x%p] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
-            stk->stk_name, stk,
-            file_name, line_number,
-            stk->init_file, stk->init_line, stk->init_func);
+        printf("stack_t " MAG "%s [0x%llx] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
+               stk->stk_name, stk_enc_ptr,
+               file_name, line_number,
+               stk->init_file, stk->init_line, stk->init_func);
         printf(GRN "{\n"
-            "%-10s= %d\n"
-            "%-10s= %d\n"
-            "\n"
-            MAG "\tdata [0x%p]:\n"
-            CYN "\t{\n",
-            "\tindex", stk->index,
-            "\tcapacity", stk->capacity,
-            stk->data);
+               "%-10s= %d\n"
+               "%-10s= %d\n"
+               "\n"
+               MAG "\tdata:\n"
+               CYN "\t{\n",
+               "\tindex", stk->index,
+               "\tcapacity", stk->capacity);
 
         for (int i = 1; i < stk->capacity; i++)
         {

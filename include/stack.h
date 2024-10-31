@@ -67,20 +67,28 @@ StackError StackPop       (size_t stk_enc_ptr, StackElem_t* var);
 StackError StackPush      (size_t stk_enc_ptr, StackElem_t value);
 
 #ifndef NDEBUG
-/*!
-    Stack initializer
-    \param[in, out]  stk_enc_ptr  Encoded pointer to stack structure
-    \return Type of stack error or 0 for "no error"-state
-    ----------------------------------------------------------------------------------------------------- */
-StackError StackInit(size_t* stk_enc_ptr, const char* stk_name, const char* stk_init_file,
-                    int stk_init_line, const char* stk_init_func);
+    /*!
+        Stack initializer
+        \param[in, out]  stk_enc_ptr  Encoded pointer to stack structure
+        \return Type of stack error or 0 for "no error"-state
+        ----------------------------------------------------------------------------------------------------- */
+    StackError StackInit(size_t* stk_enc_ptr, const char* stk_name, const char* stk_init_file,
+                         int stk_init_line, const char* stk_init_func);
+
+    /*!
+        Prints stack info (ONLY DEFINED IN DEBUG MODE)
+        \param[in]  stk_enc_ptr  Encoded pointer to stack structure
+        \param[in]  file_name    Name of file where function was called
+        \param[in]  line_number  Number of line where function was called
+    */
+    void StackDump(size_t stk_enc_ptr, const char* file_name, int line_number);
 #else
-/*! -----------------------------------------------------------------------------------------------------
-    Stack initializer
-    \param[in, out]  stk_enc_ptr  Encoded pointer to stack structure
-    \return Type of stack error or 0 for "no error"-state
-    ----------------------------------------------------------------------------------------------------- */
-StackError StackInit(size_t* stk_enc_ptr);
+    /*! -----------------------------------------------------------------------------------------------------
+        Stack initializer
+        \param[in, out]  stk_enc_ptr  Encoded pointer to stack structure
+        \return Type of stack error or 0 for "no error"-state
+        ----------------------------------------------------------------------------------------------------- */
+    StackError StackInit(size_t* stk_enc_ptr);
 #endif
 
 #endif
