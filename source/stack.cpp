@@ -575,7 +575,7 @@ static StackError StackVerifyAll(stack_t* stk)
         PRINT_CELLS_VALUE_(stk->capacity-1);
 
         printf("\t}\n"
-            GRN "}\n" WHT);
+            GRN "}" WHT "\n\n");
 
         #undef PRINT_CELLS_VALUE
     }
