@@ -6,8 +6,6 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "stack_utils.h"
-
 typedef long long int StackElem_t;
 
 #ifndef NDEBUG
