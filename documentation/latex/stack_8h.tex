@@ -1,6 +1,6 @@
-\doxysection{include/stack.h File Reference}
-\hypertarget{stack_8h}{}\label{stack_8h}\index{include/stack.h@{include/stack.h}}
-{\ttfamily \#include "{}settings.\+h"{}}\newline
+\doxysection{source/stack/stack.h File Reference}
+\hypertarget{stack_8h}{}\label{stack_8h}\index{source/stack/stack.h@{source/stack/stack.h}}
+{\ttfamily \#include "{}stack\+\_\+utils.\+h"{}}\newline
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -8,6 +8,12 @@
 \begin{DoxyCompactList}\small\item\em Is replaced with it\textquotesingle{}s arguements only in debug mode. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{stack_8h_adb2828f07099e672463abe8410adaf5b}{CREATE\+\_\+\+STACK}}(stk\+\_\+enc\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Creates stack structure depending on debug mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{stack_8h_aec4cc18479f81a54f7ef8e64a7047a28}\label{stack_8h_aec4cc18479f81a54f7ef8e64a7047a28} 
+typedef long long int {\bfseries Stack\+Elem\+\_\+t}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -37,11 +43,13 @@ enum \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}}
 \item 
 \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_a9de482fbaf42578591717f72543a7a69}{Stack\+Dtor}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr)
 \item 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_ab270232b09b3eec5c330e6ab79e138f3}{Stack\+Pop}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}var)
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_ab270232b09b3eec5c330e6ab79e138f3}{Stack\+Pop}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, Stack\+Elem\+\_\+t \texorpdfstring{$\ast$}{*}var)
 \item 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_a42d67b51bf0ce6bfc20e4361df927820}{Stack\+Push}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, \mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}} value)
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_a42d67b51bf0ce6bfc20e4361df927820}{Stack\+Push}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, Stack\+Elem\+\_\+t value)
 \item 
 \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} \mbox{\hyperlink{stack_8h_ab1e04aca91ddcd525d79bc417509832d}{Stack\+Init}} (size\+\_\+t \texorpdfstring{$\ast$}{*}stk\+\_\+enc\+\_\+ptr, const char \texorpdfstring{$\ast$}{*}stk\+\_\+name, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+file, int stk\+\_\+init\+\_\+line, const char \texorpdfstring{$\ast$}{*}stk\+\_\+init\+\_\+func)
+\item 
+void \mbox{\hyperlink{stack_8h_afb3318cb772bf4d27fb2622d395c9223}{Stack\+Dump}} (size\+\_\+t stk\+\_\+enc\+\_\+ptr, const char \texorpdfstring{$\ast$}{*}file\+\_\+name, int line\+\_\+number)
 \end{DoxyCompactItemize}
 
 
@@ -57,7 +65,7 @@ File with constructions for main work with stack
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{stack_8h_ab1e04aca91ddcd525d79bc417509832d}{StackInit}}(stk\_enc\_ptr,\ \#stk\_enc\_ptr,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_PRETTY\_FUNCTION\_\_)}
+\DoxyCodeLine{StackInit(stk\_enc\_ptr,\ \#stk\_enc\_ptr,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_PRETTY\_FUNCTION\_\_)}
 
 \end{DoxyCode}
 
@@ -89,10 +97,25 @@ Is replaced with it\textquotesingle{}s arguements only in debug mode.
 \mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Dtor (\begin{DoxyParamCaption}\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{stk\+\_\+enc\+\_\+ptr}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
- Destruct stack \hypertarget{stack_8cpp_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md1}{autotoc\+\_\+md1}}\label{stack_8cpp_autotoc_md1}
+ Destruct stack \hypertarget{stack_8h_autotoc_md11}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md11}{autotoc\+\_\+md11}}\label{stack_8h_autotoc_md11}
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in,out}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack sructure \\
+\hline
+\end{DoxyParams}
+\Hypertarget{stack_8h_afb3318cb772bf4d27fb2622d395c9223}\index{stack.h@{stack.h}!StackDump@{StackDump}}
+\index{StackDump@{StackDump}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackDump()}{StackDump()}}
+{\footnotesize\ttfamily \label{stack_8h_afb3318cb772bf4d27fb2622d395c9223} 
+void Stack\+Dump (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{file\+\_\+name}{, }\item[{int}]{line\+\_\+number}{}\end{DoxyParamCaption})}
+
+Prints stack info (ONLY DEFINED IN DEBUG MODE) 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack structure \\
+\hline
+\mbox{\texttt{ in}}  & {\em file\+\_\+name} & Name of file where function was called \\
+\hline
+\mbox{\texttt{ in}}  & {\em line\+\_\+number} & Number of line where function was called \\
 \hline
 \end{DoxyParams}
 \Hypertarget{stack_8h_ab1e04aca91ddcd525d79bc417509832d}\index{stack.h@{stack.h}!StackInit@{StackInit}}
@@ -106,7 +129,7 @@ Stack initializer
 \mbox{\texttt{ in,out}}  & {\em stk\+\_\+enc\+\_\+ptr} & Encoded pointer to stack structure \\
 \hline
 \end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md4}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md4}{autotoc\+\_\+md4}}\label{stack_8cpp_autotoc_md4}
+\hypertarget{stack_8h_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md14}{autotoc\+\_\+md14}}\label{stack_8h_autotoc_md14}
 \begin{DoxyReturn}{Returns}
 Type of stack error or 0 for "{}no error"{}-\/state 
 \end{DoxyReturn}
@@ -114,7 +137,7 @@ Type of stack error or 0 for "{}no error"{}-\/state
 \index{StackPop@{StackPop}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
 {\footnotesize\ttfamily \label{stack_8h_ab270232b09b3eec5c330e6ab79e138f3} 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Pop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{Stack\+Elem\+\_\+t \texorpdfstring{$\ast$}{*}}]{var}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
  Extractes value from stack 
@@ -124,7 +147,7 @@ Type of stack error or 0 for "{}no error"{}-\/state
 \mbox{\texttt{ out}}  & {\em var} & Pointer to variable where extracted value should be put \\
 \hline
 \end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md2}{autotoc\+\_\+md2}}\label{stack_8cpp_autotoc_md2}
+\hypertarget{stack_8h_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md12}{autotoc\+\_\+md12}}\label{stack_8h_autotoc_md12}
 \begin{DoxyReturn}{Returns}
 Type of stack error or 0 for "{}no error"{}-\/state 
 \end{DoxyReturn}
@@ -132,7 +155,7 @@ Type of stack error or 0 for "{}no error"{}-\/state
 \index{StackPush@{StackPush}!stack.h@{stack.h}}
 \doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
 {\footnotesize\ttfamily \label{stack_8h_a42d67b51bf0ce6bfc20e4361df927820} 
-\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{\mbox{\hyperlink{settings_8h_a9719da99103169a38a529237e4339b79}{Stack\+Elem\+\_\+t}}}]{value}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stack_8h_a718b65e86333f55ca5e49a321552fa32}{Stack\+Error}} Stack\+Push (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{stk\+\_\+enc\+\_\+ptr}{, }\item[{Stack\+Elem\+\_\+t}]{value}{}\end{DoxyParamCaption})}
 
 \DoxyHorRuler{0}
  Extractes value from stack 
@@ -142,7 +165,7 @@ Type of stack error or 0 for "{}no error"{}-\/state
 \mbox{\texttt{ in}}  & {\em value} & Value that should be put to stack \\
 \hline
 \end{DoxyParams}
-\hypertarget{stack_8cpp_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md3}{autotoc\+\_\+md3}}\label{stack_8cpp_autotoc_md3}
+\hypertarget{stack_8h_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{autotoc\+\_\+md13}{autotoc\+\_\+md13}}\label{stack_8h_autotoc_md13}
 \begin{DoxyReturn}{Returns}
 Type of stack error or 0 for "{}no error"{}-\/state 
 \end{DoxyReturn}

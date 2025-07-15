@@ -8,7 +8,7 @@
 
 #include "stack_utils.h"
 
-typedef long long unsigned int StackElem_t;
+typedef long long int StackElem_t;
 
 #ifndef NDEBUG
     /// @brief Is replaced with it's arguements only in debug mode

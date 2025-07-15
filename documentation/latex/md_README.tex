@@ -1,0 +1,25 @@
+\chapter{Toxic\textquotesingle{}s Stack}
+\hypertarget{md_README}{}\label{md_README}\index{Toxic\textquotesingle{}s Stack@{Toxic\textquotesingle{}s Stack}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Description}{Description}}\label{md_README_autotoc_md1}
+I guess all of you know what stack is. And that\textquotesingle{}s my variation that I\textquotesingle{}m going to use in my future projects. Stack uses hash (DJB2) and canary protection. Also it encodes pointer, so it isn\textquotesingle{}t so easy to find real stack in memory (but not very complicated too).\hypertarget{md_README_autotoc_md2}{}\doxysection{\texorpdfstring{Installation}{Installation}}\label{md_README_autotoc_md2}
+Just download files from include/ and source/ (you do not need my "{}main.\+cpp"{}) and include "{}stack.\+h"{} to your project.\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md_README_autotoc_md3}
+All functions and macros below return value of "{}\+Code\+Error"{} data type.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{List\ of\ the\ most\ important\ functions\ (no\ caps)\ and\ macros\ (caps):}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ CREATE\_STACK(size\_t*\ stk\_enc\_ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ \ creates\ and\ initializes\ the\ stack\ (returns\ encoded\ pointer)}
+\DoxyCodeLine{\ \ \ \ StackDtor\ \ \ (size\_t*\ stk\_enc\_ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ \ destructs\ the\ stack}
+\DoxyCodeLine{\ \ \ \ StackPush\ \ \ (size\_t\ stk\_enc\_ptr,\ StackElem\_t\ value)\ \ //\ \ puts\ value\ to\ stack}
+\DoxyCodeLine{\ \ \ \ StackPop\ \ \ \ (size\_t\ stk\_enc\_ptr,\ StackElem\_t*\ var)\ \ \ //\ \ pulls\ value\ from\ stack}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Contributing and feedback}{Contributing and feedback}}\label{md_README_autotoc_md4}
+You can always find me on Telegram 👉 \href{t.me/TToxFac}{\texttt{ Toxic}}
+
+I would really like to see your pull requests and discuss your ideas 😜
+
+ 

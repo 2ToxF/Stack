@@ -547,7 +547,7 @@ static StackError StackVerifyAll(stack_t* stk)
                     sprintf(index_string, "*[%d]", (idx));                          \
                 else                                                                \
                     sprintf(index_string, "*[%d - %d]", idx_first_of_same, (idx));  \
-                printf("\t\t%-12s  =  %llu\n", index_string, stk->data[idx]);       \
+                printf("\t\t%-12s  =  %lld\n", index_string, stk->data[idx]);       \
                 idx_first_of_same = (idx + 1);                                      \
             }
 
