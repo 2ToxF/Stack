@@ -13,16 +13,14 @@ All functions and macros below return value of "CodeError" data type.
 ```
 List of the most important functions (no caps) and macros (caps):
 
-    CREATE_STACK(size_t* stk_enc_ptr)                    //  creates and initialazes the stack (returns encoded pointer)
+    CREATE_STACK(size_t* stk_enc_ptr)                    //  creates and initializes the stack (returns encoded pointer)
     StackDtor   (size_t* stk_enc_ptr)                    //  destructs the stack
     StackPush   (size_t stk_enc_ptr, StackElem_t value)  //  puts value to stack
     StackPop    (size_t stk_enc_ptr, StackElem_t* var)   //  pulls value from stack
 ```
 
 ## Contributing and feedback
-You can always find me on VK 👉 [Toxic](https://vk.com/2toxicman)
-
-And also on Telegram 👉 [Toxic](t.me/ToxicF)
+You can always find me on Telegram 👉 [Toxic](t.me/TToxFac)
 
 I would really like to see your pull requests and discuss your ideas 😜
 
