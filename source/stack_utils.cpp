@@ -31,11 +31,11 @@ bool IsEqual(double num1, double num2)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-uint64_t MyGetRandom64()
+long long unsigned int MyGetRandom64()
 {
-    uint64_t random_number = 0;
+    long long unsigned int random_number = 0;
 
-    for (uint64_t i = 0; i < MAX_RAND_RETRIES; i++)
+    for (long long unsigned int i = 0; i < MAX_RAND_RETRIES; i++)
         if (__builtin_ia32_rdrand64_step(&random_number))
         {
             random_number = random_number/ULONG_MAX*(MAX_RAND - MIN_RAND) + MIN_RAND;

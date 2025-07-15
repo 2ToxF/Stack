@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "input_output.h"
 #include "stack.h"
 #include "stack_utils.h"
 
@@ -19,7 +18,7 @@ static size_t key_for_ptr_dec = 0;
 static const size_t DEFAULT_STK_CAPACITY = 8;
 
 /// @brief Maximum length of string that is used to make dump beautiful
-static const int MAX_TEMP_DUMP_STR_LEN = 12;
+static const int MAX_TEMP_DUMP_STR_LEN = 29;
 
 /// @brief Coefficeint for upsizing stack
 static const int RESIZE_COEF      = 2;
@@ -315,7 +314,7 @@ StackError StackPop(size_t stk_enc_ptr, StackElem_t* var)
         if (stk->index == 0)
         {
             stk->code_errors |= STACK_ANTIOVERFLOW_ERR;
-            StackHash(stk);
+            STACK_HASH(stk);
 
             #ifndef NDEBUG
                 StackDump(StackPtrXOR((size_t) stk), __FILE__, __LINE__);
@@ -548,13 +547,13 @@ static StackError StackVerifyAll(stack_t* stk)
                     sprintf(index_string, "*[%d]", (idx));                          \
                 else                                                                \
                     sprintf(index_string, "*[%d - %d]", idx_first_of_same, (idx));  \
-                printf("\t\t%-12s  =  %lg\n", index_string, stk->data[idx]);        \
+                printf("\t\t%-12s  =  %llu\n", index_string, stk->data[idx]);       \
                 idx_first_of_same = (idx + 1);                                      \
             }
 
 
         printf(RED "STACK ERROR: %u\n", stk->code_errors);
-        printf("stack_t " MAG "%s [0x%llx] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
+        printf("stack_t " MAG "%s [0x%lx] " BLU "at %s:%d " YEL "born at %s:%d (%s)\n",
                stk->stk_name, stk_enc_ptr,
                file_name, line_number,
                stk->init_file, stk->init_line, stk->init_func);

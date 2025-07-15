@@ -8,7 +8,14 @@
 
 #include <stdint.h>
 
-#include "settings.h"
+#define BLK "\033[0;30m"
+#define RED "\033[0;31m"
+#define GRN "\033[0;32m"
+#define YEL "\033[0;33m"
+#define BLU "\033[0;34m"
+#define MAG "\033[0;35m"
+#define CYN "\033[0;36m"
+#define WHT "\033[0;37m"
 
 /*!
     Checks whether two doubles are equal or not
@@ -20,9 +27,9 @@ bool IsEqual(double num1, double num2);
 
 /*!
     Gets random number
-    \return Random number as an unsigned long
+    \return Random number as an unsigned long long
 */
-uint64_t MyGetRandom64();
+long long unsigned int MyGetRandom64();
 
 /*!
     Hashes info using DJB2 algorithm

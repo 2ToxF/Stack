@@ -6,7 +6,9 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "settings.h"
+#include "stack_utils.h"
+
+typedef long long unsigned int StackElem_t;
 
 #ifndef NDEBUG
     /// @brief Is replaced with it's arguements only in debug mode
